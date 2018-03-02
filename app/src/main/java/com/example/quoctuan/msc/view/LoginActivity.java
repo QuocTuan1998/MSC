@@ -1,7 +1,9 @@
-package com.example.quoctuan.msc;
+package com.example.quoctuan.msc.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.quoctuan.msc.R;
 
 public class LoginActivity extends AppCompatActivity {
 
