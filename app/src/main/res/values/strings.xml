@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MSC</string>
+    <string name="tao_tai_khoan">No Account yet? Create one</string>
+    <string name="dang_nhap">Login</string>
+    <string name="name">name</string>
+    <string name="pass">password</string>
 </resources>

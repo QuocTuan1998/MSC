@@ -4,6 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
     tools:context="com.example.quoctuan.msc.view.LoginActivity">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/login_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+    <EditText
+        android:id="@+id/edit_name"
+        android:hint="@string/name"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_pass"
+        android:hint="@string/pass"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:padding="10dp"
+        android:background="#ce3821"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/dang_nhap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt_sign_up"
+            android:textAlignment="center"
+            android:text="@string/tao_tai_khoan"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:layout_width="170dp"
+            android:layout_height="1dp"/>
+        <TextView
+            android:textColor="@android:color/white"
+            android:text="or"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:layout_width="170dp"
+            android:layout_height="1dp"/>
+    </LinearLayout>
 
 </LinearLayout>
