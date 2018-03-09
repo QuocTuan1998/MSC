@@ -4,4 +4,10 @@
     <string name="dang_nhap">Login</string>
     <string name="name">name</string>
     <string name="pass">password</string>
+    <string name="my_music">My Music</string>
+    <string name="bat_hat">Bài hát</string>
+    <string name="album">Album</string>
+    <string name="nghe_si">Nghệ sỹ</string>
+    <string name="playlist">Playlist</string>
+    <string name="yeu_thich">Yêu thích</string>
 </resources>
