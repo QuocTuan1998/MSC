@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
-                    Intent login = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent login = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(login);
                 }
             }
