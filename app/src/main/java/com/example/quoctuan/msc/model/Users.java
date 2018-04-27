@@ -4,7 +4,7 @@ package com.example.quoctuan.msc.model;
  * Created by Nguyen Van Tung on 4/26/2018.
  */
 
-public class User {
+public class Users {
     private int id;
     private String email;
     private String password;
@@ -12,7 +12,7 @@ public class User {
     private boolean status; //nếu visible==true, disable==false
     private String token;
 
-    public User(int id, String email, String password, boolean role, boolean status, String token) {
+    public Users(int id, String email, String password, boolean role, boolean status, String token) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -21,7 +21,7 @@ public class User {
         this.token = token;
     }
 
-    public User() {
+    public Users() {
     }
 
     public int getId() {
