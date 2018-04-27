@@ -18,7 +18,7 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
 
-    <string name="link_login">http://192.168.1.3/mvc/api.php</string>
+    <string name="link_login">http://192.168.1.8/mvc/api.php</string>
 
     <string name="music">music</string>
     <string name="type">type</string>
