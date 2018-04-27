@@ -7,17 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonLogin;
-import com.example.quoctuan.msc.model.User;
+import com.example.quoctuan.msc.model.Users;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }//end Đăng nhập thất bại và thông báo lỗi lên TextInputsLayout
 
     //Đăng nhập thành công và ghi xuống sharedPreferences
-    private void LoginSuccess(User user) {
+    private void LoginSuccess(Users user) {
         sharedPreferences = getSharedPreferences("InforUser", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", user.getId());
