@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonLogin;
@@ -75,9 +76,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //truyền theo dạng post
         HashMap<String, String> hm_controller = new HashMap<>();
-        hm_controller.put("c", "user");
+        hm_controller.put("c", Common.USER);
         HashMap<String, String> hm_function = new HashMap<>();
-        hm_function.put("a", "login");
+        hm_function.put("a", Common.LOGIN);
         HashMap<String, String> hm_email = new HashMap<>();
         hm_email.put("email", login_ed_name.getText().toString());
         HashMap<String, String> hm_password = new HashMap<>();
