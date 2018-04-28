@@ -69,6 +69,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
         //end animation background cho man hinh login
+
+        //dấu mũi tên bên trái để trở về
+        setSupportActionBar(login_toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        login_toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        login_toolbar.setTitle(getResources().getString(R.string.Login));
+        //end dấu mũi tên bên trái để trở về
     }
 
     private void addEvents() {
@@ -88,6 +96,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (b){
                     login_til_pass.setErrorEnabled(false);
                 }
+            }
+        });
+
+        login_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
