@@ -1,4 +1,4 @@
-package com.example.quoctuan.msc.view;
+package com.example.quoctuan.msc.view.Splash;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.view.Home.HomeActivity;
+import com.example.quoctuan.msc.view.Main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
-                    Intent login = new Intent(SplashActivity.this, HomeActivity.class);
+                    Intent login = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(login);
                 }
             }

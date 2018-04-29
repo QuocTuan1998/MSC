@@ -1,11 +1,11 @@
-package com.example.quoctuan.msc.view;
+package com.example.quoctuan.msc.view.Main;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.quoctuan.msc.Adapter.MainViewpagerAdapter;
+import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
 import com.example.quoctuan.msc.R;
 
 public class MainActivity extends AppCompatActivity {
