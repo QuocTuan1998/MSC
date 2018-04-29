@@ -1,4 +1,4 @@
-package com.example.quoctuan.msc.view.MainFragment;
+package com.example.quoctuan.msc.view.ListSong.Fragment;
 
 
 import android.os.Bundle;
@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 
 import com.example.quoctuan.msc.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OnlineFragment extends Fragment {
+public class PlaylistFragment extends Fragment {
 
 
-    public OnlineFragment() {
+    public PlaylistFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +24,7 @@ public class OnlineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_online, container, false);
+        return inflater.inflate(R.layout.fragment_playlist, container, false);
     }
 
 }

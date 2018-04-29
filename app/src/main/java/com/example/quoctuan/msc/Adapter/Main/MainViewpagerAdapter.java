@@ -1,13 +1,11 @@
-package com.example.quoctuan.msc.Adapter;
+package com.example.quoctuan.msc.Adapter.Main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.view.View;
 
-import com.example.quoctuan.msc.view.MainFragment.OfflineFragment;
-import com.example.quoctuan.msc.view.MainFragment.OnlineFragment;
+import com.example.quoctuan.msc.view.Main.MainFragment.OfflineFragment;
+import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 
 import java.util.ArrayList;
 import java.util.List;

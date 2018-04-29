@@ -1,4 +1,4 @@
-package com.example.quoctuan.msc.view;
+package com.example.quoctuan.msc.view.Login;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
