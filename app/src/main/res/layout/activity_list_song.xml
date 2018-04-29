@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.v7.widget.Toolbar
+                    android:id="@+id/list_song_toolbar"
                     app:title="Thư viện nhạc"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:titleTextColor="@color/colorBlack"
@@ -84,6 +85,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginRight="15dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:orientation="horizontal"
@@ -94,22 +96,22 @@
                         android:focusable="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_skip_previous_24dp"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_play_arrow_black_24dp"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_skip_next_24dp"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </RelativeLayout>
 
