@@ -2,19 +2,26 @@ package com.example.quoctuan.msc.view;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.View;
+
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonLogin;
+import com.example.quoctuan.msc.model.User;
 import com.example.quoctuan.msc.model.Users;
 
 import java.util.ArrayList;
@@ -22,15 +29,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText login_ed_name, login_ed_pass;
     private Button login_btn_sign_in;
     private TextInputLayout login_til_name, login_til_pass;
     private ProgressDialog progressDialog;
+    private LinearLayout linear_login;
+    private Toolbar login_toolbar;
 
     private DownloadJson downloadJson;
     private ParserJsonLogin parserJsonLogin;
     private SharedPreferences sharedPreferences;
+    private AnimationDrawable animationDrawable;
 
 
     @Override
@@ -50,12 +60,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_ed_pass       = findViewById(R.id.login_edit_pass);
         login_til_name      = findViewById(R.id.login_til_name);
         login_til_pass      = findViewById(R.id.login_til_pass);
+        linear_login        = findViewById(R.id.linear_login);
+        login_toolbar       = findViewById(R.id.login_toolbar);
+
+        //animation background cho man hinh login
+        animationDrawable = (AnimationDrawable) linear_login.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+        //end animation background cho man hinh login
+
+        //dấu mũi tên bên trái để trở về
+        setSupportActionBar(login_toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        login_toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        login_toolbar.setTitle(getResources().getString(R.string.Login));
+        //end dấu mũi tên bên trái để trở về
     }
 
     private void addEvents() {
         login_btn_sign_in.setOnClickListener(this);
-        login_til_pass.setOnFocusChangeListener(this);
-        login_til_name.setOnFocusChangeListener(this);
+
+        login_ed_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    login_til_name.setErrorEnabled(false);
+                }
+            }
+        });
+        login_ed_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    login_til_pass.setErrorEnabled(false);
+                }
+            }
+        });
+
+        login_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -65,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Đang xử lí đăng nhập");
                 progressDialog.setMessage("vui lòng đợi chúng tôi trong giây lát");
+                progressDialog.show();
                 if (CheckInforLogin())
                     Login();
                 break;
@@ -79,6 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         hm_controller.put("c", Common.USER);
         HashMap<String, String> hm_function = new HashMap<>();
         hm_function.put("a", Common.LOGIN);
+
         HashMap<String, String> hm_email = new HashMap<>();
         hm_email.put("email", login_ed_name.getText().toString());
         HashMap<String, String> hm_password = new HashMap<>();
@@ -96,7 +147,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (!downloadJson.get().isEmpty()){ //nếu downloadJson.get() có dữ liệu là <=> đăng nhập thành công
                 parserJsonLogin = new ParserJsonLogin();
                 LoginSuccess(parserJsonLogin.PaserJsonLogin(downloadJson.get()));
-                progressDialog.dismiss();
             }else {
                 LoginFail(); //ngược lại đăng nhập thất bại
             }
@@ -128,18 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }//end Đăng nhập thất bại và thông báo lỗi lên TextInputsLayout
 
     //Đăng nhập thành công và ghi xuống sharedPreferences
-    private void LoginSuccess(Users user) {
-        sharedPreferences = getSharedPreferences("InforUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("id", user.getId());
-        editor.putString("email", user.getEmail());
-        editor.putString("password", user.getPassword());
-        editor.putBoolean("role", user.isRole());
-        editor.putBoolean("status", user.isStatus());
-        editor.putString("token", user.getToken());
-        editor.commit();
-        editor.apply();
-
+    private void LoginSuccess(final Users user) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -147,13 +186,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Thread.sleep(2000);
                 }catch (Exception e){}
                 finally {
+                    sharedPreferences = getSharedPreferences("InforUser", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("id", user.getId());
+                    editor.putString("email", user.getEmail());
+                    editor.putString("password", user.getPassword());
+                    editor.putBoolean("role", user.isRole());
+                    editor.putBoolean("status", user.isStatus());
+                    editor.putString("token", user.getToken());
+                    editor.commit();
+                    editor.apply();
                     progressDialog.dismiss();
                 }
             }
         });
 
         thread.start();
-        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
     }//end Đăng nhập thành công
 
     //kiểm tra thông tin đăng nhập
@@ -171,19 +219,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     //end kiểm tra thông tin đăng nhập
 
-    //sự kiện lắng nghe textInputLayout có được nhấn hay không
-    @Override
-    public void onFocusChange(View view, boolean b) {
-        if (b){
-            switch (view.getId()){
-                case R.id.login_til_name:
-                    login_til_name.setErrorEnabled(false);
-                    break;
-                case R.id.login_til_pass:
-                    login_til_pass.setEnabled(false);
-                    break;
-            }
-        }
-    }
-    //end sự kiện lắng nghe textInputLayout có được nhấn hay không
+
 }

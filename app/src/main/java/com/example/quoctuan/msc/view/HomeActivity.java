@@ -48,6 +48,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
         int id = item.getItemId();
 
         if (id == R.id.mnu_item_login) {
@@ -76,4 +77,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
+
+
 }
