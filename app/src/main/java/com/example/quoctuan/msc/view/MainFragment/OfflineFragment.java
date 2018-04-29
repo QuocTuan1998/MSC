@@ -85,6 +85,43 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
     }
 
 
+//    private void getListMusic() {
+//            arrayList = new ArrayList<>();
+//            ContentResolver contentResolver = getActivity().getContentResolver();
+//            Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+//            String selection = MediaStore.Audio.Media.IS_MUSIC + " !=0";
+//            String sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
+//            Cursor cursor = contentResolver.query(uri, null, selection, null , sortOrder);
+//
+//            if (cursor != null){
+//                int count = cursor.getCount();
+//                Log.d("count", count + "");
+//                if (count > 0){
+//                    while (cursor.moveToNext()){
+//                        int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
+//                        String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+//                        String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+//                        String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+//                        arrayList.add(new Songs(id,artist,0,0,0,title,"","",data));
+//                    }
+//                }
+//            }
+//
+//
+//    }
+//
+//    private void CheckPermissionReadExternalStorage(){
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+//                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUES_CODE_PERMISSION_READ_STORAGE);
+//            }else getListMusic();
+//        }else {
+//            getListMusic();
+//        }
+//    }
+//    }
+//
+
     private void getListMusic() {
             arrayList = new ArrayList<>();
             ContentResolver contentResolver = getActivity().getContentResolver();
