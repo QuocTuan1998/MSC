@@ -1,7 +1,6 @@
 package com.example.quoctuan.msc.model.ParserJson;
 
 import com.example.quoctuan.msc.model.User;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 public class ParserJsonLogin {
     public User PaserJsonLogin(String json){
         User user = new User();
-
+  
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonUser = jsonObject.getJSONArray("user");
