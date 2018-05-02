@@ -6,7 +6,7 @@ package com.example.quoctuan.msc.model;
 
 public class Songs {
     private int id;
-    private int casi_id;
+    private String casi;
     private int album_id;
     private int theloai_id;
     private int tacgia_id;
@@ -18,9 +18,9 @@ public class Songs {
     public Songs() {
     }
 
-    public Songs(int id, int casi_id, int album_id, int theloai_id, int tacgia_id, String ten, String anh, String loi_bai_hat, String link) {
+    public Songs(int id, String casi, int album_id, int theloai_id, int tacgia_id, String ten, String anh, String loi_bai_hat, String link) {
         this.id = id;
-        this.casi_id = casi_id;
+        this.casi = casi;
         this.album_id = album_id;
         this.theloai_id = theloai_id;
         this.tacgia_id = tacgia_id;
@@ -38,12 +38,12 @@ public class Songs {
         this.id = id;
     }
 
-    public int getCasi_id() {
-        return casi_id;
+    public String getCasi() {
+        return casi;
     }
 
-    public void setCasi_id(int casi_id) {
-        this.casi_id = casi_id;
+    public void setCasi(String casi) {
+        this.casi = casi;
     }
 
     public int getAlbum_id() {

@@ -18,6 +18,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/offline_layout_user"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground"
@@ -39,16 +40,20 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:textSize="40sp"
+                        android:id="@+id/offline_txt_user"
+                        android:textSize="30sp"
+                        android:singleLine="true"
                         android:text="My Music"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_gravity="center"
-                        android:text="Bài hát: 0"
+                        android:id="@+id/offline_count_list_song"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Bài hát: 0" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -73,6 +78,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:id="@+id/offline_layout_music"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground"
@@ -89,9 +95,11 @@
                         android:layout_centerVertical="true"
                         android:text="@string/bat_hat"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView" />
 
                     <TextView
+                        android:id="@+id/offline_count_music"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/offline_arrow_right1"
                         android:text="0"
