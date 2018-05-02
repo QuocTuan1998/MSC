@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.quoctuan.msc.view.MainActivity">
+    tools:context="com.example.quoctuan.msc.view.Main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:background="@color/colorWhite"
@@ -16,6 +16,7 @@
 
         <android.support.v7.widget.Toolbar
             app:layout_scrollFlags="scroll|enterAlways"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -24,8 +25,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:selectAllOnFocus="false"
+                    android:focusableInTouchMode="true"
+                    android:selectAllOnFocus="true"
+                    android:focusable="true"
                     android:paddingLeft="10dp"
+                    android:singleLine="true"
                     android:drawablePadding="10dp"
                     android:drawableLeft="@drawable/ic_search"
                     android:hint="Tìm kiếm tên bài hát, ca sĩ, ..."

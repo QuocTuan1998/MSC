@@ -1,4 +1,4 @@
-package com.example.quoctuan.msc.view;
+package com.example.quoctuan.msc.view.Home;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,10 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.view.Login.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+        
     }
 
     @Override

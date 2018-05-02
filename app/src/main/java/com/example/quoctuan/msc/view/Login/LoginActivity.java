@@ -1,4 +1,4 @@
-package com.example.quoctuan.msc.view;
+package com.example.quoctuan.msc.view.Login;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Đang xử lí đăng nhập");
                 progressDialog.setMessage("vui lòng đợi chúng tôi trong giây lát");
-                if (CheckInforLogin())
+                if (CheckInforLogin());
                     Login();
                 break;
         }

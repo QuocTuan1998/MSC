@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_login"
-    tools:context="com.example.quoctuan.msc.view.LoginActivity">
+    tools:context="com.example.quoctuan.msc.view.Login.LoginActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/login_toolbar"
