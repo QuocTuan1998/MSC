@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.Songs;
+import com.example.quoctuan.msc.view.ListSongActivity;
 import com.example.quoctuan.msc.view.LoginActivity;
 
 import java.util.ArrayList;
@@ -136,7 +137,8 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
                 startActivity(ilogin);
                 break;
             case R.id.offline_layout_music:
-
+                Intent iMusic = new Intent(getContext(), ListSongActivity.class);
+                startActivity(iMusic);
                 break;
         }
     }
