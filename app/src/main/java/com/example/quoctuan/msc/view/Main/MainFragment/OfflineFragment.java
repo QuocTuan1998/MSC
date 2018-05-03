@@ -108,7 +108,6 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
 //            }
 //    }
 
-=======
 
 //
 //    }

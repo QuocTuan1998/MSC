@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     private EditText login_ed_name, login_ed_pass;
     private Button login_btn_sign_in;
     private TextInputLayout login_til_name, login_til_pass;
@@ -190,100 +190,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                     });
-
-                    thread.start();
-                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                }//end Đăng nhập thành công
-
-                //kiểm tra thông tin đăng nhập
-
-            private boolean CheckInforLogin() {
-                if (login_ed_name.getText().toString().isEmpty() || login_ed_pass.getText().toString().isEmpty()) {
-                    if (login_ed_name.getText().toString().isEmpty())
-                        login_til_name.setError("Bạn cần nhập địa chỉ email");
-                    if (login_ed_pass.getText().toString().isEmpty())
-                        login_ed_pass.setError("Bạn cần nhập mật khẩu");
-                    return false;
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(login_ed_name.getText().toString()).matches()) {
-                    login_til_name.setError("Bạn cần nhập địa chỉ email gồm abc@gmail.com");
-                    return false;
-                } else return true;
-            }
-            //end kiểm tra thông tin đăng nhập
-
-            //sự kiện lắng nghe textInputLayout có được nhấn hay không
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b) {
-                    switch (view.getId()) {
-                        case R.id.login_til_name:
-                            login_til_name.setErrorEnabled(false);
-                            break;
-                        case R.id.login_til_pass:
-                            login_til_pass.setEnabled(false);
-                            break;
-                    }
                 }
             }
-            //end sự kiện lắng nghe textInputLayout có được nhấn hay không
-        login_toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        });
+    }
+    //kiểm tra thông tin đăng nhập
 
-            {
-                @Override
-                public void onClick (View view){
-                onBackPressed();
-            }
-            });
-        }
+    public boolean CheckInforLogin() {
+        if (login_ed_name.getText().toString().isEmpty() || login_ed_pass.getText().toString().isEmpty()) {
+            if (login_ed_name.getText().toString().isEmpty())
+                login_til_name.setError("Bạn cần nhập địa chỉ email");
+            if (login_ed_pass.getText().toString().isEmpty())
+                login_ed_pass.setError("Bạn cần nhập mật khẩu");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(login_ed_name.getText().toString()).matches()) {
+            login_til_name.setError("Bạn cần nhập địa chỉ email gồm abc@gmail.com");
+            return false;
+        } else return true;
+    }
 
-        @Override
-        public void onClick (View view){
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if (b) {
             switch (view.getId()) {
-                case R.id.login_btn_sign_in:
-                    progressDialog = new ProgressDialog(this);
-                    progressDialog.setTitle("Đang xử lí đăng nhập");
-                    progressDialog.setMessage("vui lòng đợi chúng tôi trong giây lát");
-                    progressDialog.show();
-                    if (CheckInforLogin())
-                        Login();
+                case R.id.login_til_name:
+                    login_til_name.setErrorEnabled(false);
+                    break;
+                case R.id.login_til_pass:
+                    login_til_pass.setEnabled(false);
                     break;
             }
         }
-
-        private void Login () {
-            List<HashMap<String, String>> attr = new ArrayList<>();
-
-            //truyền theo dạng post
-            HashMap<String, String> hm_controller = new HashMap<>();
-            hm_controller.put("c", Common.USER);
-            HashMap<String, String> hm_function = new HashMap<>();
-            hm_function.put("a", Common.LOGIN);
-
-            HashMap<String, String> hm_email = new HashMap<>();
-            hm_email.put("email", login_ed_name.getText().toString());
-            HashMap<String, String> hm_password = new HashMap<>();
-            hm_password.put("password", login_ed_pass.getText().toString());
-
-            attr.add(hm_controller);
-            attr.add(hm_function);
-            attr.add(hm_email);
-            attr.add(hm_password);
-
-            downloadJson = new DownloadJson(attr);
-            downloadJson.execute(getResources().getString(R.string.link_login));
-
-            try {
-                if (!downloadJson.get().isEmpty()) { //nếu downloadJson.get() có dữ liệu là <=> đăng nhập thành công
-                    parserJsonLogin = new ParserJsonLogin();
-                    LoginSuccess(parserJsonLogin.PaserJsonLogin(downloadJson.get()));
-                } else {
-                    LoginFail(); //ngược lại đăng nhập thất bại
-                }
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        
+    }
+}
