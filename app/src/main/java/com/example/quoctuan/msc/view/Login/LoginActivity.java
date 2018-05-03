@@ -20,18 +20,18 @@ import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonLogin;
 import com.example.quoctuan.msc.model.User;
+import com.example.quoctuan.msc.model.Users;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
-
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText login_ed_name, login_ed_pass;
     private Button login_btn_sign_in;
     private TextInputLayout login_til_name, login_til_pass;
     private ProgressDialog progressDialog;
-
     private LinearLayout linear_login;
     private Toolbar login_toolbar;
 
@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ParserJsonLogin parserJsonLogin;
     private SharedPreferences sharedPreferences;
     private AnimationDrawable animationDrawable;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +174,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }catch (Exception e){}
                 finally {
                     progressDialog.dismiss();
-
         login_ed_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {

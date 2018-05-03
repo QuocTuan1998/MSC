@@ -43,12 +43,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-        
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
+        int id = item.getItemId();
+
+        if (id == R.id.mnu_item_login) {
+            Intent login = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(login);
+        }else if (id == R.id.mnu_item_setting) {
+//            Intent setting = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(setting);
+        }else if (id == R.id.mnu_item_about) {
+//            Intent about = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(about);
+        }else if (id == R.id.mnu_item_music) {
+//            Intent music = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(music);
+        }else if (id == R.id.mnu_item_album) {
+//            Intent album = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(album);
+        }else if (id == R.id.mnu_item_type) {
+//            Intent type = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(type);
+        }else if (id == R.id.mnu_item_charts) {
+//            Intent charts = new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(charts);
+        }
+            DrawerLayout drawer = findViewById(R.id.draw_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
         return false;
     }
+
 }

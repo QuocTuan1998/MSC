@@ -106,6 +106,9 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
 //                    }
 //                }
 //            }
+//    }
+
+=======
 
 //
 //    }
@@ -146,6 +149,7 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
 
 
     }
+
     private void CheckPermissionReadExternalStorage(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
