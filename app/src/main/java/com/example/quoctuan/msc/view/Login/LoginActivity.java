@@ -91,7 +91,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Đang xử lí đăng nhập");
                 progressDialog.setMessage("vui lòng đợi chúng tôi trong giây lát");
+
                 if (CheckInforLogin())
+
                     Login();
                 break;
         }
