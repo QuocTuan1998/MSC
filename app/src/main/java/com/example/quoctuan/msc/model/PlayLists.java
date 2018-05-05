@@ -1,6 +1,8 @@
 package com.example.quoctuan.msc.model;
 
-public class PlayLists {
+import java.io.Serializable;
+
+public class PlayLists implements Serializable {
     private int id;
     private int user_id;
     private String ten;

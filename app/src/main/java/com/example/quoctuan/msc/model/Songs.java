@@ -1,10 +1,12 @@
 package com.example.quoctuan.msc.model;
 
+import java.io.Serializable;
+
 /**
  * Created by BINH-PC on 2/3/2018.
  */
 
-public class Songs {
+public class Songs implements Serializable {
     private int id;
     private String casi;
     private int album_id;
