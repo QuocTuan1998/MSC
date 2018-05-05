@@ -16,6 +16,7 @@ public class Common {
     public static final String SERVER_NAME = "http://10.0.2.2/";
     public static final String URL = SERVER_NAME + "php/mvc/"; // you cna change another location
     public static final String URL_API = URL + "api.php";
+    public static final String URL_IMG_SONG = URL + "img/song/";
 
     //controller
     public static final String ALBUM = "album";
