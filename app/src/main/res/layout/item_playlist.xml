@@ -28,6 +28,9 @@
         <TextView
             android:id="@+id/item_playlist_name"
             android:layout_weight="1"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
             android:text="tên"
             android:gravity="center"
             android:layout_width="match_parent"
