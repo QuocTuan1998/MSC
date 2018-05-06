@@ -10,6 +10,7 @@
     app:cardCornerRadius="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
+        android:id="@+id/item_top_layout"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:clickable="true"
