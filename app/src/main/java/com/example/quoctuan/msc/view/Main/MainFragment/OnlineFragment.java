@@ -1,31 +1,30 @@
 package com.example.quoctuan.msc.view.Main.MainFragment;
 
 
-import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.PlaylistMusicAdapter;
 import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
-import com.example.quoctuan.msc.Common.Common;
-import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
-import com.example.quoctuan.msc.model.ParserJson.ParserJsonMusic;
 import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.model.Songs;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import static android.content.Intent.getIntent;
 
 
 /**
@@ -40,6 +39,8 @@ public class OnlineFragment extends Fragment {
     private PlaylistMusicAdapter playlistMusicAdapter;
 
     private View view;
+    public MediaPlayer mediaPlayer;
+    private static List<Songs> listSongData;
 
     public OnlineFragment() {
         // Required empty public constructor
@@ -66,7 +67,24 @@ public class OnlineFragment extends Fragment {
 
 
     private void addEvents() {
+        online_recyvlerview_topfivemusic.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                //Toast.makeText(getActivity(), "ádaf" + e, Toast.LENGTH_SHORT).show();
+                return false;
 
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                //Toast.makeText(getContext(), "sádasdafaw", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                Toast.makeText(getActivity(), "ád" + disallowIntercept, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //phương thức tạo recyvlerview top 5 music
@@ -79,7 +97,7 @@ public class OnlineFragment extends Fragment {
         online_recyvlerview_topfivemusic.setLayoutManager(linearLayoutManager);
 
         //lấy dữ liệu từ màn hình splash sreen qua
-        List<Songs> listSongData = (List<Songs>) getActivity().getIntent().getSerializableExtra("TopFive");
+        listSongData = (List<Songs>) getActivity().getIntent().getSerializableExtra("TopFive");
 
         topMusicAdapter = new TopMusicAdapter(listSongData, getContext());
         online_recyvlerview_topfivemusic.setAdapter(topMusicAdapter);
@@ -97,5 +115,18 @@ public class OnlineFragment extends Fragment {
         playlistMusicAdapter = new PlaylistMusicAdapter(listPlayLlistData, getContext());
         online_recyclerview_playlist.setAdapter(playlistMusicAdapter);
         playlistMusicAdapter.notifyDataSetChanged();
+    }
+
+    public void PlayMusic(int position) {
+        String url = "http://192.168.1.8/mvc/public/music/" + listSongData.get(position).getLink();
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mediaPlayer.setDataSource(url);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
