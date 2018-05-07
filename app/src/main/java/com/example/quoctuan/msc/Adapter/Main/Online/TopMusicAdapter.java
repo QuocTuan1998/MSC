@@ -60,8 +60,4 @@ public class TopMusicAdapter extends RecyclerView.Adapter<TopMusicViewHolder> {
         return songData.size();
     }
 
-    public void PlayMusic(int position){
-        Log.d("kiemtra", position + "");
-        new OnlineFragment().PlayMusic(position);
-    }
 }

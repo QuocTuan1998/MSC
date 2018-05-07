@@ -6,7 +6,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.PlaylistMusicAdapter;
@@ -21,6 +25,7 @@ import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.model.Songs;
+import com.example.quoctuan.msc.view.Main.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,14 +37,15 @@ import java.util.List;
  */
 public class OnlineFragment extends Fragment {
 
-    private RecyclerView online_recyvlerview_topfivemusic;
+    private static RecyclerView online_recyvlerview_topfivemusic;
     private RecyclerView online_recyclerview_playlist;
+    private static LinearLayout main_layout_main;
     private LinearLayoutManager linearLayoutManager;
     private TopMusicAdapter topMusicAdapter;
     private PlaylistMusicAdapter playlistMusicAdapter;
 
     private View view;
-    public MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     private static List<Songs> listSongData;
 
     public OnlineFragment() {
@@ -62,7 +68,10 @@ public class OnlineFragment extends Fragment {
     private void addControls() {
         initRecyclerViewTopMusic(); //phương thức tạo recyvlerview top 5 music
         initRecyclerViewPlaylist(); //phương thức tạo recyclerview playlist
+        main_layout_main = view.findViewById(R.id.main_layout_main);
 
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
 
@@ -119,14 +128,34 @@ public class OnlineFragment extends Fragment {
 
     public void PlayMusic(int position) {
         String url = "http://192.168.1.8/mvc/public/music/" + listSongData.get(position).getLink();
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        if (mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+            mediaPlayer = null;
+        }
         try {
+            mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare();
             mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        new MainActivity().ShowSmallMediaLayout(listSongData.get(position).getAnh()
+                ,listSongData.get(position).getTen(), listSongData.get(position).getCasi());
+        if (main_layout_main.getPaddingBottom() == 0){
+            SetPadding();
+        }
+    }
+
+    public void PauseMusic(){
+        mediaPlayer.pause();
+    }
+    public void StartMusic(){
+        mediaPlayer.start();
+    }
+
+    public void SetPadding() {
+        main_layout_main.setPadding(0, 0 , 0 , 140);
     }
 }

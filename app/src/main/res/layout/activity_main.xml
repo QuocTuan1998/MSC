@@ -55,6 +55,7 @@
     </android.support.v4.view.ViewPager>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/main_small_meida_layout"
         android:layout_gravity="bottom"
         app:cardCornerRadius="10dp"
         android:layout_marginLeft="5dp"
@@ -88,11 +89,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/content_name"
                         android:textColor="@color/colorBlack"
                         android:text="Tên bài hát"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/content_singer"
                         android:text="Ca sĩ"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -105,21 +108,22 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_skip_previous_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
+                    android:id="@+id/content_btn_pause_play"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_play_arrow_black_24dp"
+                    android:src="@drawable/btn_play_pause"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"

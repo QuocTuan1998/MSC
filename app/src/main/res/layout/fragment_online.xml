@@ -8,6 +8,7 @@
     tools:context=".view.Main.MainFragment.OnlineFragment">
 
     <LinearLayout
+        android:id="@+id/main_layout_main"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
