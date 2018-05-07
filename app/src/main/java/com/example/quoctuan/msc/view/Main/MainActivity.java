@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
+import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 import com.squareup.picasso.Picasso;
@@ -25,7 +26,6 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
     private TabLayout main_tablayout;
     private ViewPager main_viewpager;
     public static CardView main_small_meida_layout;
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Animation small_media_animation;
 
     private MainViewpagerAdapter mainViewpagerAdapter;
+    private static PlayMusic playMusic;
 
     public static boolean IS_SET_MARGIN_BOTTOM = false;
     public static boolean IS_BUTTON_PLAY = false;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         content_name            = findViewById(R.id.content_name);
         content_singer          = findViewById(R.id.content_singer);
         content_btn_pause_play  = findViewById(R.id.content_btn_pause_play);
+
+        playMusic = new PlayMusic();
     }
 
     private void addEvents() {
@@ -89,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void PressButtonPlayPause(){
         if (!IS_BUTTON_PLAY){
             content_btn_pause_play.setImageLevel(1);
-            new OnlineFragment().PauseMusic();
+            playMusic.PauseMusic();
             IS_BUTTON_PLAY = !IS_BUTTON_PLAY;
         }else {
             content_btn_pause_play.setImageLevel(0);
-            new OnlineFragment().StartMusic();
+            playMusic.StartMusic();
             IS_BUTTON_PLAY = !IS_BUTTON_PLAY;
         }
     }

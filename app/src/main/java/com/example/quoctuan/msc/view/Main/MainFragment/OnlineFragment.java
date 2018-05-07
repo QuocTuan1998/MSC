@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.PlaylistMusicAdapter;
 import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
+import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.model.Songs;
@@ -47,6 +48,7 @@ public class OnlineFragment extends Fragment {
     private View view;
     public static MediaPlayer mediaPlayer;
     private static List<Songs> listSongData;
+    public static PlayMusic playMusic;
 
     public OnlineFragment() {
         // Required empty public constructor
@@ -70,8 +72,7 @@ public class OnlineFragment extends Fragment {
         initRecyclerViewPlaylist(); //phương thức tạo recyclerview playlist
         main_layout_main = view.findViewById(R.id.main_layout_main);
 
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        playMusic = new PlayMusic();
     }
 
 
@@ -127,32 +128,12 @@ public class OnlineFragment extends Fragment {
     }
 
     public void PlayMusic(int position) {
-        String url = "http://192.168.1.8/mvc/public/music/" + listSongData.get(position).getLink();
-        if (mediaPlayer.isPlaying()){
-            mediaPlayer.stop();
-            mediaPlayer = null;
-        }
-        try {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        playMusic.PlayMusic(listSongData.get(position).getLink());
         new MainActivity().ShowSmallMediaLayout(listSongData.get(position).getAnh()
                 ,listSongData.get(position).getTen(), listSongData.get(position).getCasi());
         if (main_layout_main.getPaddingBottom() == 0){
             SetPadding();
         }
-    }
-
-    public void PauseMusic(){
-        mediaPlayer.pause();
-    }
-    public void StartMusic(){
-        mediaPlayer.start();
     }
 
     public void SetPadding() {
