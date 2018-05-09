@@ -1,6 +1,7 @@
 package com.example.quoctuan.msc.view.Main.MainFragment;
 
 
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -32,6 +33,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.quoctuan.msc.R.string.Waiting;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +52,7 @@ public class OnlineFragment extends Fragment {
     public static MediaPlayer mediaPlayer;
     private static List<Songs> listSongData;
     public static PlayMusic playMusic;
+    public static ProgressDialog dialog;
 
     public OnlineFragment() {
         // Required empty public constructor

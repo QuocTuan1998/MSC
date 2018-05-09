@@ -29,4 +29,6 @@
     <string name="offline">Offline</string>
     <string name="Online">Online</string>
     <string name="chuDe_TheLoai">Chủ đề và thể loại</string>
+    <string name="Waiting">Vui lòng chờ</string>
+    <string name="progressing">Đang xử lí</string>
 </resources>
