@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.GetData.GetListMusic;
 import com.example.quoctuan.msc.model.Songs;
@@ -72,8 +73,8 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
         offline_layout_music    = view.findViewById(R.id.offline_layout_music);
         offline_txt_user        = view.findViewById(R.id.offline_txt_user);
 
-        offline_count_list_song.setText(getContext().getResources().getString(R.string.countSong) + " " + arrayList.size());
-        offline_count_music.setText(arrayList.size() + "");
+        offline_count_list_song.setText(getContext().getResources().getString(R.string.countSong) + " " + Common.MusicOfflines.size());
+        offline_count_music.setText(Common.MusicOfflines.size() + "");
         if (!sharedPreferences.getString("email", "").equals("")){
             offline_txt_user.setText(sharedPreferences.getString("email", ""));
         }
@@ -85,6 +86,7 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
         offline_layout_music.setOnClickListener(this);
     }
 
+//
 //    private void getListMusic() {
 //            arrayList = new ArrayList<>();
 //            ContentResolver contentResolver = getActivity().getContentResolver();
@@ -106,56 +108,16 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
 //                    }
 //                }
 //            }
-//    }
-
-
 //
 //    }
-//
-//    private void CheckPermissionReadExternalStorage(){
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-//                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUES_CODE_PERMISSION_READ_STORAGE);
-//            }else getListMusic();
-//        }else {
-//            getListMusic();
-//        }
-//    }
-//    }
-//
-
-    private void getListMusic() {
-            arrayList = new ArrayList<>();
-            ContentResolver contentResolver = getActivity().getContentResolver();
-            Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-            String selection = MediaStore.Audio.Media.IS_MUSIC + " !=0";
-            String sortOrder = MediaStore.Audio.Media.TITLE + " ASC";
-            Cursor cursor = contentResolver.query(uri, null, selection, null , sortOrder);
-
-            if (cursor != null){
-                int count = cursor.getCount();
-                Log.d("count", count + "");
-                if (count > 0){
-                    while (cursor.moveToNext()){
-                        int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-                        String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                        String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-                        String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-                        arrayList.add(new Songs(id,artist,0,0,0,title,"","",data));
-                    }
-                }
-            }
-
-
-    }
 
     private void CheckPermissionReadExternalStorage(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUES_CODE_PERMISSION_READ_STORAGE);
-            }else arrayList = (ArrayList<Songs>) getListMusic.GetListMusic();
+            }else Common.MusicOfflines = getListMusic.GetListMusic();
         }else {
-            arrayList = (ArrayList<Songs>) getListMusic.GetListMusic();
+            Common.MusicOfflines = getListMusic.GetListMusic();
         }
     }
 
@@ -163,7 +125,7 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
             AllowPermissionReadStorage = true;
-            arrayList = (ArrayList<Songs>) getListMusic.GetListMusic();
+            Common.MusicOfflines = getListMusic.GetListMusic();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -172,8 +134,10 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.offline_layout_user:
-                Intent ilogin = new Intent(getContext(), LoginActivity.class);
-                startActivity(ilogin);
+                if (sharedPreferences.getString("email", "").equals("")){
+                    Intent ilogin = new Intent(getContext(), LoginActivity.class);
+                    startActivity(ilogin);
+                }
                 break;
             case R.id.offline_layout_music:
                 Intent iMusic = new Intent(getContext(), ListSongActivity.class);

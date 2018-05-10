@@ -80,6 +80,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_btn_sign_in.setOnClickListener(this);
         login_til_pass.setOnFocusChangeListener(this);
         login_til_name.setOnFocusChangeListener(this);
+        login_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

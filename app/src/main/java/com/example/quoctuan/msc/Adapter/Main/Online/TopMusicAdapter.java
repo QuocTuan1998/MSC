@@ -1,11 +1,7 @@
 package com.example.quoctuan.msc.Adapter.Main.Online;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.rtp.AudioStream;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +9,9 @@ import android.view.ViewGroup;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.Songs;
-import com.example.quoctuan.msc.view.Main.MainFragment.ImpOnlineFragment;
-import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 import com.example.quoctuan.msc.viewholder.TopMusicViewHolder;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

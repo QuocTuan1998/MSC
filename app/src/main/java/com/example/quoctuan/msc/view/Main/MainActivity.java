@@ -1,27 +1,24 @@
 package com.example.quoctuan.msc.view.Main;
 
-import android.media.MediaPlayer;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
-import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Animation small_media_animation;
 
     private MainViewpagerAdapter mainViewpagerAdapter;
+    private MediaMetadataRetriever mediaMetadataRetriever;
     private static PlayMusic playMusic;
 
     public static boolean IS_SET_MARGIN_BOTTOM = false;
@@ -49,6 +47,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         addControls();
         addEvents();
+        CheckPlayed();
+    }
+
+    public void CheckPlayed() {
+        if (Common.IS_PLAYED){
+            if (Common.PLAYED_IS_ONLINE){
+                ShowSmallLayoutOnline();
+            }else {
+                ShowSmallLayoutOffline();
+            }
+        }
+
+        if (Common.mediaPlayer.isPlaying()) {
+            content_btn_pause_play.setImageLevel(0);
+            IS_BUTTON_PLAY = false;
+        }
+        else{
+            content_btn_pause_play.setImageLevel(1);
+            IS_BUTTON_PLAY = true;
+        }
     }
 
     private void addControls() {
@@ -77,13 +95,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void ShowSmallMediaLayout(int possition){
+    public void ShowSmallMediaLayout(){
+        if (Common.PLAYED_IS_ONLINE){
+            ShowSmallLayoutOnline();
+        }else {
+            ShowSmallLayoutOffline();
+        }
+    }
+
+    public void ShowSmallLayoutOffline(){
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-        Picasso.get().load(Common.URL_IMG_SONG + Common.TopFiveMusic.get(possition).getAnh()).into(content_play_img);
-        content_name.setText(Common.TopFiveMusic.get(possition).getAnh());
-        content_singer.setText(Common.TopFiveMusic.get(possition).getCasi());
+        mediaMetadataRetriever = new MediaMetadataRetriever();
+        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
+        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+        if (data != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            content_play_img.setImageBitmap(bitmap);
+        }
+        content_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
+        content_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         content_btn_pause_play.setImageLevel(0);
     }
+
+    public void ShowSmallLayoutOnline(){
+        if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
+        Picasso.get().load(Common.URL_IMG_SONG + Common.TopFiveMusic.get(Common.POSSITION_MUSIC_PLAYED).getAnh()).into(content_play_img);
+        content_name.setText(Common.TopFiveMusic.get(Common.POSSITION_MUSIC_PLAYED).getTen());
+        content_singer.setText(Common.TopFiveMusic.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
+        content_btn_pause_play.setImageLevel(0);
+    }
+
     public void SetPaddingBottom(){
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) main_small_meida_layout.getLayoutParams();
         layoutParams.bottomMargin = 8;

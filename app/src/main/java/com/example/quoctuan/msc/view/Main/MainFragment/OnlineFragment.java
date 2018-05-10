@@ -2,22 +2,15 @@ package com.example.quoctuan.msc.view.Main.MainFragment;
 
 
 import android.app.ProgressDialog;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -27,14 +20,9 @@ import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.PlayLists;
-import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.quoctuan.msc.R.string.Waiting;
 
 
 /**
@@ -129,8 +117,8 @@ public class OnlineFragment extends Fragment {
         playlistMusicAdapter.notifyDataSetChanged();
     }
 
-    public void SetLayoutWhenPlaying(int position) {
-        new MainActivity().ShowSmallMediaLayout(position);
+    public void SetLayoutWhenPlaying() {
+        new MainActivity().ShowSmallMediaLayout();
         if (main_layout_main.getPaddingBottom() == 0){
             SetPadding();
         }

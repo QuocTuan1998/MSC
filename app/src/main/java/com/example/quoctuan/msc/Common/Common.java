@@ -23,6 +23,11 @@ public class Common {
     public static final String URL_API = URL + "api.php";
     public static final String URL_IMG_SONG = URL + "public/img/songs/";
     public static final String URL_LINK_SONG = URL + "public/music/";
+    public static final String URL_IMG_PLAYLIST = URL + "public/img/playlist/";
+
+    public static boolean IS_PLAYED = false;
+    public static boolean PLAYED_IS_ONLINE = false;
+    public static int POSSITION_MUSIC_PLAYED = 0;
 
     //controller
     public static final String ALBUM = "album";
@@ -42,7 +47,8 @@ public class Common {
     public static final String LOGIN = "login";
 
     //DEFAULT DATA
-    public static List<Songs> TopFiveMusic ;
+    public static List<Songs> TopFiveMusic;
     public static MediaPlayer mediaPlayer;
+    public static List<Songs> MusicOfflines;
 
 }
