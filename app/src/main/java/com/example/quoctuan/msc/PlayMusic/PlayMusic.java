@@ -3,6 +3,7 @@ package com.example.quoctuan.msc.PlayMusic;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 
@@ -13,33 +14,29 @@ import java.io.IOException;
  */
 
 public class PlayMusic {
-    public static MediaPlayer mediaPlayer;
 
     public PlayMusic() {
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        Common.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
-    public void PlayMusic(String link){
-        String url = "http://192.168.1.8/mvc/public/music/" + link;
-        if (mediaPlayer.isPlaying()){
-            mediaPlayer.stop();
-        }
+    public void PlayMusic(int possition){
+        String url = Common.URL_LINK_SONG + Common.TopFiveMusic.get(possition).getLink();
         try {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
+            Common.mediaPlayer.stop();
+            Common.mediaPlayer = new MediaPlayer();
+            Common.mediaPlayer.setDataSource(url);
+            Common.mediaPlayer.prepare();
+            Common.mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void StartMusic(){
-        mediaPlayer.start();
+        Common.mediaPlayer.start();
     }
 
     public void PauseMusic(){
-        mediaPlayer.pause();
+        Common.mediaPlayer.pause();
     }
 }

@@ -1,12 +1,14 @@
 package com.example.quoctuan.msc.view.Splash;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonMusic;
@@ -35,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         addControls();
         GetTopFiveMusic();
         GetPlayList();
+        Common.mediaPlayer = new MediaPlayer();
     }
 
 
@@ -63,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
         downloadJson.execute("http://192.168.1.8/mvc/api.php");
 
         try {
-            listSongData = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
+            Common.TopFiveMusic = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -104,7 +107,6 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }finally {
                     Intent i_home = new Intent(SplashActivity.this, MainActivity.class);
-                    i_home.putExtra("TopFive", (Serializable) listSongData);
                     i_home.putExtra("Playlist", (Serializable) listPlayLlistData);
                     startActivity(i_home);
                 }
