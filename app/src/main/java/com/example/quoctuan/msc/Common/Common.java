@@ -1,6 +1,11 @@
 package com.example.quoctuan.msc.Common;
 
+import android.media.MediaPlayer;
+
+import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.model.Users;
+
+import java.util.List;
 
 /**
  * Created by BINH-PC on 2/3/2018.
@@ -13,10 +18,11 @@ public class Common {
 
     //Local of genymotion 10.0.3.2
     //Local of Android emulator 10.0.2.2
-    public static final String SERVER_NAME = "http://10.0.2.2/";
-    public static final String URL = SERVER_NAME + "php/mvc/"; // you cna change another location
+    public static final String SERVER_NAME = "http://192.168.1.8/";
+    public static final String URL = SERVER_NAME + "mvc/"; // you cna change another location
     public static final String URL_API = URL + "api.php";
-    public static final String URL_IMG_SONG = URL + "img/song/";
+    public static final String URL_IMG_SONG = URL + "public/img/songs/";
+    public static final String URL_LINK_SONG = URL + "public/music/";
 
     //controller
     public static final String ALBUM = "album";
@@ -36,5 +42,7 @@ public class Common {
     public static final String LOGIN = "login";
 
     //DEFAULT DATA
+    public static List<Songs> TopFiveMusic ;
+    public static MediaPlayer mediaPlayer;
 
 }

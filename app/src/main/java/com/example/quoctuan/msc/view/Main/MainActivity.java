@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
@@ -76,11 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void ShowSmallMediaLayout(String image, String name, String singer){
+    public void ShowSmallMediaLayout(int possition){
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-        Picasso.get().load("http://192.168.1.8/mvc/public/img/song/" + image).into(content_play_img);
-        content_name.setText(name);
-        content_singer.setText(singer);
+        Picasso.get().load(Common.URL_IMG_SONG + Common.TopFiveMusic.get(possition).getAnh()).into(content_play_img);
+        content_name.setText(Common.TopFiveMusic.get(possition).getAnh());
+        content_singer.setText(Common.TopFiveMusic.get(possition).getCasi());
         content_btn_pause_play.setImageLevel(0);
     }
     public void SetPaddingBottom(){

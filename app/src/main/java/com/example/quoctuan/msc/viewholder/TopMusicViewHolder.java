@@ -5,9 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
+import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 
@@ -51,7 +50,8 @@ public class TopMusicViewHolder extends RecyclerView.ViewHolder implements View.
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.item_top_layout:
-                new OnlineFragment().PlayMusic(getAdapterPosition());
+                new PlayMusic().PlayMusic(getAdapterPosition());
+                new OnlineFragment().SetLayoutWhenPlaying(getAdapterPosition());
                 break;
         }
     }

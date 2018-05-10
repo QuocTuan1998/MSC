@@ -1,6 +1,7 @@
 package com.example.quoctuan.msc.view.Main.MainFragment;
 
 
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.PlaylistMusicAdapter;
 import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
+import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.PlayLists;
@@ -31,6 +33,8 @@ import com.example.quoctuan.msc.view.Main.MainActivity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.quoctuan.msc.R.string.Waiting;
 
 
 /**
@@ -47,8 +51,9 @@ public class OnlineFragment extends Fragment {
 
     private View view;
     public static MediaPlayer mediaPlayer;
-    private static List<Songs> listSongData;
+    //private static List<Songs> listSongData;
     public static PlayMusic playMusic;
+    public static ProgressDialog dialog;
 
     public OnlineFragment() {
         // Required empty public constructor
@@ -106,10 +111,7 @@ public class OnlineFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         online_recyvlerview_topfivemusic.setLayoutManager(linearLayoutManager);
 
-        //lấy dữ liệu từ màn hình splash sreen qua
-        listSongData = (List<Songs>) getActivity().getIntent().getSerializableExtra("TopFive");
-
-        topMusicAdapter = new TopMusicAdapter(listSongData, getContext());
+        topMusicAdapter = new TopMusicAdapter(Common.TopFiveMusic, getContext());
         online_recyvlerview_topfivemusic.setAdapter(topMusicAdapter);
         topMusicAdapter.notifyDataSetChanged();
     }//end phương thức tạo recyvlerview top 5 music
@@ -127,10 +129,8 @@ public class OnlineFragment extends Fragment {
         playlistMusicAdapter.notifyDataSetChanged();
     }
 
-    public void PlayMusic(int position) {
-        playMusic.PlayMusic(listSongData.get(position).getLink());
-        new MainActivity().ShowSmallMediaLayout(listSongData.get(position).getAnh()
-                ,listSongData.get(position).getTen(), listSongData.get(position).getCasi());
+    public void SetLayoutWhenPlaying(int position) {
+        new MainActivity().ShowSmallMediaLayout(position);
         if (main_layout_main.getPaddingBottom() == 0){
             SetPadding();
         }
