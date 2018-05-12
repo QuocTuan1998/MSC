@@ -48,7 +48,7 @@ public class Common {
 
     //DEFAULT DATA
     public static List<Songs> TopFiveMusic;
-    public static MediaPlayer mediaPlayer;
+    public static MediaPlayer MEDIAPLAYER;
     public static List<Songs> MusicOfflines;
 
 }

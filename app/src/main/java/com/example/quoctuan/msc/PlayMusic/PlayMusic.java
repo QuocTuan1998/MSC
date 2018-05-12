@@ -18,17 +18,17 @@ import java.io.IOException;
 public class PlayMusic {
 
     public PlayMusic() {
-        Common.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        Common.MEDIAPLAYER.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
     public void PlayMusic(int possition){
         String url = Common.URL_LINK_SONG + Common.TopFiveMusic.get(possition).getLink();
         try {
-            Common.mediaPlayer.stop();
-            Common.mediaPlayer = new MediaPlayer();
-            Common.mediaPlayer.setDataSource(url);
-            Common.mediaPlayer.prepare();
-            Common.mediaPlayer.start();
+            Common.MEDIAPLAYER.stop();
+            Common.MEDIAPLAYER = new MediaPlayer();
+            Common.MEDIAPLAYER.setDataSource(url);
+            Common.MEDIAPLAYER.prepare();
+            Common.MEDIAPLAYER.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,11 +37,11 @@ public class PlayMusic {
     public void PlayMusic(Context context, int possition){
         Uri uri = Uri.parse(Common.MusicOfflines.get(possition).getLink());
         try {
-            Common.mediaPlayer.stop();
-            Common.mediaPlayer = new MediaPlayer();
-            Common.mediaPlayer.setDataSource(context, uri);
-            Common.mediaPlayer.prepare();
-            Common.mediaPlayer.start();
+            Common.MEDIAPLAYER.stop();
+            Common.MEDIAPLAYER = new MediaPlayer();
+            Common.MEDIAPLAYER.setDataSource(context, uri);
+            Common.MEDIAPLAYER.prepare();
+            Common.MEDIAPLAYER.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,10 +49,10 @@ public class PlayMusic {
     }
 
     public void StartMusic(){
-        Common.mediaPlayer.start();
+        Common.MEDIAPLAYER.start();
     }
 
     public void PauseMusic(){
-        Common.mediaPlayer.pause();
+        Common.MEDIAPLAYER.pause();
     }
 }
