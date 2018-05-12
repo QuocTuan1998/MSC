@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
         attr.add(HmAction);
 
         DownloadJson downloadJson = new DownloadJson(attr);
-        downloadJson.execute("http://192.168.1.8/mvc/api.php");
+        downloadJson.execute(Common.URL_API);
 
         try {
             Common.TopFiveMusic = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
@@ -83,7 +83,7 @@ public class SplashActivity extends AppCompatActivity {
         attr.add(HmControler);
 
         DownloadJson downloadJson = new DownloadJson(attr);
-        downloadJson.execute("http://192.168.1.8/mvc/api.php");
+        downloadJson.execute(Common.URL_API);
 
         try {
             listPlayLlistData = new ParserJsonPlaylist().ParserJsonPlaylist(downloadJson.get());
