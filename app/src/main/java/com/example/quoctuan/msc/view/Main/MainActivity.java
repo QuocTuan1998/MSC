@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        if (Common.mediaPlayer.isPlaying()) {
+        if (Common.MEDIAPLAYER.isPlaying()) {
             content_btn_pause_play.setImageLevel(0);
             IS_BUTTON_PLAY = false;
         }
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             content_play_img.setImageBitmap(bitmap);
         }else {
-//            content_play_img.setImageResource(R.drawable.Music);
+                content_play_img.setImageResource(R.drawable.music);
         }
         content_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         content_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void PressButtonPlayPause(){
-        if (!Common.mediaPlayer.isPlaying()){
+        if (!Common.MEDIAPLAYER.isPlaying()){
             content_btn_pause_play.setImageLevel(1);
             playMusic.PauseMusic();
         }else {

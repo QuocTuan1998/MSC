@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         addControls();
         GetTopFiveMusic();
         GetPlayList();
-        Common.mediaPlayer = new MediaPlayer();
+        Common.MEDIAPLAYER = new MediaPlayer();
     }
 
 
