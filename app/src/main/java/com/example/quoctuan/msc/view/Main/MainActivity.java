@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static CircleImageView content_play_img;
     public static TextView content_name, content_singer;
     public static ImageView content_btn_pause_play;
+    private static ImageView content_btn_next;
 
     public static Animation small_media_animation;
 
@@ -86,12 +88,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         content_name            = findViewById(R.id.content_name);
         content_singer          = findViewById(R.id.content_singer);
         content_btn_pause_play  = findViewById(R.id.content_btn_pause_play);
+        content_btn_next        = findViewById(R.id.content_btn_next);
 
         playMusic = new PlayMusic();
     }
 
     private void addEvents() {
         content_btn_pause_play.setOnClickListener(this);
+        main_small_meida_layout.setOnClickListener(this);
     }
 
 
@@ -111,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (data != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             content_play_img.setImageBitmap(bitmap);
+        }else {
+//            content_play_img.setImageResource(R.drawable.Music);
         }
         content_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         content_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
@@ -132,14 +138,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void PressButtonPlayPause(){
-        if (!IS_BUTTON_PLAY){
+        if (!Common.mediaPlayer.isPlaying()){
             content_btn_pause_play.setImageLevel(1);
             playMusic.PauseMusic();
-            IS_BUTTON_PLAY = !IS_BUTTON_PLAY;
         }else {
             content_btn_pause_play.setImageLevel(0);
             playMusic.StartMusic();
-            IS_BUTTON_PLAY = !IS_BUTTON_PLAY;
+        }
+    }
+
+    private void NextMusic() {
+        if (!Common.PLAYED_IS_ONLINE){
+            new PlayMusic().PlayMusic(this, Common.POSSITION_MUSIC_PLAYED ++);
+            Common.POSSITION_MUSIC_PLAYED++;
         }
     }
 
@@ -149,6 +160,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.content_btn_pause_play :
                 PressButtonPlayPause();
                 break;
+            case R.id.main_small_meida_layout:
+                break;
+            case R.id.content_btn_next:
+                NextMusic();
+                break;
         }
     }
+
 }
