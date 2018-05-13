@@ -1,8 +1,5 @@
 package com.example.quoctuan.msc.view.ListSong;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -144,6 +141,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         list_song_small_txt_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         list_song_small_txt_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         list_song_small_btn_play.setImageLevel(0);
+
     }
 
     private void ShowSmallLayoutOnline() {
@@ -177,7 +175,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.list_song_small_btn_pre:
                 if (!Common.PLAYED_IS_ONLINE){
-                    playMusic.PreHandle(view);
+                    playMusic.PreHandle(view,Common.MusicOfflines);
                 }else {
                     Common.MEDIAPLAYER.seekTo(0);
                 }
@@ -189,15 +187,17 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.list_song_small_btn_next:
                 if (!Common.PLAYED_IS_ONLINE){
-                    playMusic.NextHandle(view);
+                    playMusic.NextHandle(view,Common.MusicOfflines);
                 }else {
                     Common.MEDIAPLAYER.seekTo(0);
                 }
                 break;
+            case R.id.list_song_small_layout:
+//                Toast.makeText(this, "click!!", Toast.LENGTH_SHORT).show();
+//                Intent iPlay = new Intent(ListSongActivity.this, PlayActivity.class);
+//                startActivity(iPlay);
+                break;
         }
     }
-
-
-
 
 }

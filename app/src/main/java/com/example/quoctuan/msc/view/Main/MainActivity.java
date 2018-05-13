@@ -109,15 +109,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void ShowSmallLayoutOffline(){
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-        mediaMetadataRetriever = new MediaMetadataRetriever();
-        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
-        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-        if (data != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            content_play_img.setImageBitmap(bitmap);
-        }else {
-                content_play_img.setImageResource(R.drawable.music);
-        }
+//        mediaMetadataRetriever = new MediaMetadataRetriever();
+//        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
+//        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+//        if (data != null){
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//            content_play_img.setImageBitmap(bitmap);
+//        }else {
+//                content_play_img.setImageResource(R.drawable.music);
+//        }
         content_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         content_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         content_btn_pause_play.setImageLevel(0);
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void NextMusic() {
         if (!Common.PLAYED_IS_ONLINE){
-            new PlayMusic().PlayMusic(this, Common.POSSITION_MUSIC_PLAYED ++);
+            new PlayMusic().PlayMusic(this, Common.POSSITION_MUSIC_PLAYED ++,Common.MusicOfflines);
             Common.POSSITION_MUSIC_PLAYED++;
         }
     }

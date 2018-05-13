@@ -45,6 +45,7 @@ public class TopMusicAdapter extends RecyclerView.Adapter<TopMusicViewHolder> {
         holder.item_top_txt_singer.setText(songData.get(position).getCasi());
 
         Picasso.get().load(Common.URL_IMG_SONG + songData.get(position).getAnh()).into(holder.item_top_img_music);
+
     }
 
     @Override

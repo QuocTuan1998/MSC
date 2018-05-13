@@ -7,11 +7,14 @@ import android.net.Uri;
 import android.view.View;
 
 import com.example.quoctuan.msc.Common.Common;
+import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.view.ListSong.ListSongActivity;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nguyen Van Tung on 5/7/2018.
@@ -23,8 +26,8 @@ public class PlayMusic {
         Common.MEDIAPLAYER.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
-    public void PlayMusic(int possition){
-        String url = Common.URL_LINK_SONG + Common.TopFiveMusic.get(possition).getLink();
+    public void PlayMusic(int possition,List<Songs> music){
+        String url = Common.URL_LINK_SONG + music.get(possition).getLink();
         try {
             Common.MEDIAPLAYER.stop();
             Common.MEDIAPLAYER = new MediaPlayer();
@@ -36,8 +39,8 @@ public class PlayMusic {
         }
     }
 
-    public void PlayMusic(Context context, int possition){
-        Uri uri = Uri.parse(Common.MusicOfflines.get(possition).getLink());
+    public void PlayMusic(Context context, int possition, List<Songs> music){
+        Uri uri = Uri.parse(music.get(possition).getLink());
         try {
             Common.MEDIAPLAYER.stop();
             Common.MEDIAPLAYER = new MediaPlayer();
@@ -58,7 +61,7 @@ public class PlayMusic {
         Common.MEDIAPLAYER.pause();
     }
 
-    public void PreHandle(View view) {
+    public void PreHandle(View view, List<Songs> music) {
         if (c_pre != 0) {
 
             if (Common.POSSITION_MUSIC_PLAYED == 0) {
@@ -66,7 +69,7 @@ public class PlayMusic {
             }else {
                 Common.POSSITION_MUSIC_PLAYED --;
             }
-            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED);
+            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED, music);
             new ListSongActivity().CheckPlayed();
             c_pre = 0;
         }else {
@@ -77,7 +80,7 @@ public class PlayMusic {
 
     }
 
-    public void NextHandle(View view) {
+    public void NextHandle(View view, List<Songs> music) {
         if (c_next != 0) {
 
             if (Common.POSSITION_MUSIC_PLAYED == Common.MusicOfflines.size()-1) {
@@ -85,7 +88,7 @@ public class PlayMusic {
             }else {
                 Common.POSSITION_MUSIC_PLAYED ++;
             }
-            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED);
+            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED,music);
             new ListSongActivity().CheckPlayed();
             c_next = 0;
         }else {

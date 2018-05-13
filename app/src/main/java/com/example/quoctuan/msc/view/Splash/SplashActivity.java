@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         GetListOffline();
         GetTopFiveMusic();
         GetPlayList();
+        GetAllMusic();
 
         Common.MEDIAPLAYER = new MediaPlayer();
     }
@@ -79,6 +81,30 @@ public class SplashActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    private void GetAllMusic() {
+        Common.MusicOnlines = new ArrayList<>();
+        List<HashMap<String, String>> attr = new ArrayList<>();
+
+        HashMap<String, String> HmControler = new HashMap<>();
+        HmControler.put("c", "BaiHat");
+        HashMap<String, String> HmAction = new HashMap<>();
+        HmAction.put("a", "AllMusic");
+        attr.add(HmControler);
+        attr.add(HmAction);
+
+        DownloadJson downloadJson = new DownloadJson(attr);
+        downloadJson.execute(Common.URL_API);
+
+        try {
+            Common.MusicOnlines = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void GetPlayList() {

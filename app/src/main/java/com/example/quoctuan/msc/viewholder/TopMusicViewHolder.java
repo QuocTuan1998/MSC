@@ -1,5 +1,6 @@
 package com.example.quoctuan.msc.viewholder;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,9 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.quoctuan.msc.Common.Common;
-import com.example.quoctuan.msc.PlayMusic.PlayMusic;
+import com.example.quoctuan.msc.view.PlayMusic.PlayActivity;
 import com.example.quoctuan.msc.R;
-import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,11 +51,14 @@ public class TopMusicViewHolder extends RecyclerView.ViewHolder implements View.
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.item_top_layout:
-                Common.IS_PLAYED = true;
-                Common.PLAYED_IS_ONLINE = true;
+//                Common.IS_PLAYED = true;
+//                Common.PLAYED_IS_ONLINE = true;
                 Common.POSSITION_MUSIC_PLAYED = getAdapterPosition();
-                new PlayMusic().PlayMusic(getAdapterPosition());
-                new OnlineFragment().SetLayoutWhenPlaying();
+//                new PlayMusic().PlayMusic(getAdapterPosition());
+//                new OnlineFragment().SetLayoutWhenPlaying();
+
+                Intent iPlay = new Intent(view.getContext(), PlayActivity.class);
+                view.getContext().startActivity(iPlay);
                 break;
         }
     }

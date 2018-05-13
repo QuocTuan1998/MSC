@@ -1,8 +1,6 @@
 package com.example.quoctuan.msc.Adapter.ListSong.Fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +30,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicViewHolder> {
 
     @Override
     public MusicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_offline, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music, parent, false);
         return new MusicViewHolder(view);
     }
 
@@ -49,6 +47,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicViewHolder> {
 
         holder.item_music_off_txt_name.setText(listMusicOffline.get(position).getTen());
         holder.item_music_off_txt_singer.setText(listMusicOffline.get(position).getCasi());
+
     }
 
     @Override

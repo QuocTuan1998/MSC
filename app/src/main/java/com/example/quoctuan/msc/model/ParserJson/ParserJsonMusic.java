@@ -31,7 +31,7 @@ public class ParserJsonMusic {
                 song.setTen(jsonSong.getString("ten"));
                 song.setAnh(jsonSong.getString("anh"));
                 song.setLink(jsonSong.getString("link"));
-                Log.d("kiemtra", jsonSong.getString("ten"));
+//                Log.d("kiemtra", jsonSong.getString("ten"));
                 listSong.add(song);
             }
         } catch (JSONException e) {
