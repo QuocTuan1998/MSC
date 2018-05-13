@@ -3,9 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorProgress">#cecece</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorHint">#bdbdbd</color>
     <color name="colorBlack">#000000</color>
     <color name="transparentColorBlack">#48000000</color>
     <color name="transparentColorWhite">#48ffffff</color>
+    <color name="colorBackground">#25282C</color>
 </resources>
