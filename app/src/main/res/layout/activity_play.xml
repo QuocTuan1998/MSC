@@ -1,9 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.quoctuan.msc.PlayActivity">
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient"
+    tools:context="com.example.quoctuan.msc.view.Home.HomeActivity">
 
-</android.support.constraint.ConstraintLayout>
+<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6">
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:background="@drawable/bg_imagine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+    <include layout="@layout/toolbar"/>
+    <FrameLayout
+        android:id="@+id/imgSong"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/timeSong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <me.tankery.lib.circularseekbar.CircularSeekBar
+            android:id="@+id/seekbarProcess"
+            android:layout_width="220dp"
+            android:layout_height="240dp"
+            app:cs_circle_style = "round"
+            app:cs_progress = "70"
+            app:cs_max = "100"
+            app:cs_negative_enabled="false"
+            app:cs_pointer_stroke_width="0dp"
+            app:cs_circle_stroke_width="5dp"
+            app:cs_circle_color="@color/colorProgress"
+            app:cs_pointer_halo_color_ontouch = "@color/colorPrimary"
+            app:cs_circle_progress_color="@color/colorAccent"
+            app:cs_pointer_color="@color/colorPrimaryDark"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgSongCircle"
+            android:src="@drawable/song1"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@android:color/black"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/timeSong"
+        android:layout_above="@+id/lyrics"
+        android:textColor="@android:color/white"
+        android:text="02:37"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/lyrics"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/control"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textAlignment="center"
+            android:textColor="#a1a1a1"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:text="17 and a half years old"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:text="Worrying about my brother finding out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textAlignment="center"
+            android:textColor="#a1a1a1"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:text="17 and a half years old"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/control"
+        android:weightSum="6"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btnShuffle"
+            android:layout_weight="1"
+            android:src="@drawable/loop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/btnPrev"
+            android:layout_weight="1"
+            android:src="@drawable/prev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgPlay"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:src="@drawable/pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/circle_play" />
+        </FrameLayout>
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_weight="1"
+            android:src="@drawable/next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/btnRepeat"
+            android:layout_weight="1"
+            android:src="@drawable/repeat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
