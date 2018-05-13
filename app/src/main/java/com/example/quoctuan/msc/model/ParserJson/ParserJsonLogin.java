@@ -1,5 +1,7 @@
 package com.example.quoctuan.msc.model.ParserJson;
 
+import android.util.Log;
+
 import com.example.quoctuan.msc.model.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,5 +40,23 @@ public class ParserJsonLogin {
         }
 
         return user;
+    }
+
+    public boolean ParserJsonNewPassword(String data){
+        boolean changed = false;
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            JSONArray jsonArray = jsonObject.getJSONArray("newPassword");
+            JSONObject jsondata = jsonArray.getJSONObject(0);
+            Log.d("kiemtra", jsondata.getString("message"));
+            if (jsondata.getString("message").equals("true"))
+                changed = true;
+            else
+                changed = false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return changed;
     }
 }

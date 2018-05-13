@@ -1,5 +1,7 @@
 package com.example.quoctuan.msc.view.Main;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -31,13 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static CircleImageView content_play_img;
     public static TextView content_name, content_singer;
     public static ImageView content_btn_pause_play;
-    private static ImageView content_btn_next;
+    private static ImageView content_btn_next, content_btn_prev;
 
     public static Animation small_media_animation;
 
     private MainViewpagerAdapter mainViewpagerAdapter;
     private MediaMetadataRetriever mediaMetadataRetriever;
     private static PlayMusic playMusic;
+    private static Context context;
 
     public static boolean IS_SET_MARGIN_BOTTOM = false;
     public static boolean IS_BUTTON_PLAY = false;
@@ -89,13 +92,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         content_singer          = findViewById(R.id.content_singer);
         content_btn_pause_play  = findViewById(R.id.content_btn_pause_play);
         content_btn_next        = findViewById(R.id.content_btn_next);
+        content_btn_prev        = findViewById(R.id.content_btn_prev);
 
         playMusic = new PlayMusic();
+        context = this;
     }
 
     private void addEvents() {
         content_btn_pause_play.setOnClickListener(this);
         main_small_meida_layout.setOnClickListener(this);
+        content_btn_next.setOnClickListener(this);
+        content_btn_prev.setOnClickListener(this);
     }
 
 
@@ -138,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void PressButtonPlayPause(){
-        if (!Common.mediaPlayer.isPlaying()){
+        if (Common.mediaPlayer.isPlaying()){
             content_btn_pause_play.setImageLevel(1);
             playMusic.PauseMusic();
         }else {
@@ -151,7 +158,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!Common.PLAYED_IS_ONLINE){
             new PlayMusic().PlayMusic(this, Common.POSSITION_MUSIC_PLAYED ++);
             Common.POSSITION_MUSIC_PLAYED++;
-        }
+        }else Common.mediaPlayer.seekTo(0);
+    }
+
+    private void PrevMusic() {
+        if (!Common.PLAYED_IS_ONLINE){
+
+        }else Common.mediaPlayer.seekTo(0);
     }
 
     @Override
@@ -164,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.content_btn_next:
                 NextMusic();
+                break;
+            case R.id.content_btn_prev:
+                PrevMusic();
                 break;
         }
     }

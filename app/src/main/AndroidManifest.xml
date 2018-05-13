@@ -24,8 +24,9 @@
         </activity>
         <activity android:name=".view.Main.MainActivity" />
         <activity android:name=".view.ListSong.ListSongActivity" />
-        <activity android:name=".view.PlayMusic.PlayActivity" />
-        <activity android:name=".PlayActivity"></activity>
+        <activity android:name=".view.InfoMusic.InfoMusicOnline" />
+        <activity android:name=".view.User.UserActivity" />
+        <activity android:name=".ShowMusicOnlineActivity"></activity>
     </application>
 
 </manifest>

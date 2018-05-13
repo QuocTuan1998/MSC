@@ -18,12 +18,12 @@ public class Common {
 
     //Local of genymotion 10.0.3.2
     //Local of Android emulator 10.0.2.2
-    public static final String SERVER_NAME = "http://10.15.215.36/";
+    public static final String SERVER_NAME = "http://192.168.1.8/";
     public static final String URL = SERVER_NAME + "mvc/"; // you cna change another location
     public static final String URL_API = URL + "api.php";
     public static final String URL_IMG_SONG = URL + "public/img/songs/";
     public static final String URL_LINK_SONG = URL + "public/music/";
-    public static final String URL_IMG_PLAYLIST = URL + "public/img/playlist/";
+    public static final String URL_IMG_PLAYLIST = URL + "public/img/playlists/";
 
     public static boolean IS_PLAYED = false;
     public static boolean PLAYED_IS_ONLINE = false;
@@ -45,6 +45,14 @@ public class Common {
     //action
     public static final String INDEX = "index";
     public static final String LOGIN = "login";
+    public static final String LISTENINGTOIDMUSIC = "LuotNgheTheoIDBaiHat";
+    public static final String COUNFAV = "CountYeuThich";
+    public static final String CHECKISFAV = "check_yeuthich_exists";
+    public static final String SAVEFAV = "saveYeuThich";
+    public static final String UNFAV = "boyeuThich";
+    public static final String NEWPASSWORD = "newPassword";
+    public static final String PlusMusic = "PlusMusic";
+
 
     //DEFAULT DATA
     public static List<Songs> TopFiveMusic;

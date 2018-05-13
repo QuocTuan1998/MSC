@@ -22,7 +22,8 @@ public class ParserJsonMusic {
         listSong = new ArrayList<>();
 
         try {
-            JSONArray jsonArray = new JSONArray(dataJson);
+            JSONObject jsonObject = new JSONObject(dataJson);
+            JSONArray jsonArray = jsonObject.getJSONArray("topfive");
             for (int i = 0; i < jsonArray.length(); i++){
                 Songs song = new Songs();
                 JSONObject jsonSong = jsonArray.getJSONObject(i);

@@ -27,8 +27,10 @@ import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.GetData.GetListMusic;
 import com.example.quoctuan.msc.model.Songs;
+import com.example.quoctuan.msc.model.User;
 import com.example.quoctuan.msc.view.ListSong.ListSongActivity;
 import com.example.quoctuan.msc.view.Login.LoginActivity;
+import com.example.quoctuan.msc.view.User.UserActivity;
 
 import java.util.ArrayList;
 
@@ -37,12 +39,12 @@ import java.util.ArrayList;
  */
 public class OfflineFragment extends Fragment implements View.OnClickListener {
     private View view;
-    private TextView offline_count_list_song, offline_count_music, offline_txt_user;
+    private static TextView offline_count_list_song, offline_count_music, offline_txt_user;
     private LinearLayout offline_layout_user;
     private RelativeLayout offline_layout_music;
 
     private ArrayList<Songs> arrayList;
-    private SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
     private GetListMusic getListMusic;
 
     private final static int REQUES_CODE_PERMISSION_READ_STORAGE = 0;
@@ -137,12 +139,23 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
                 if (sharedPreferences.getString("email", "").equals("")){
                     Intent ilogin = new Intent(getContext(), LoginActivity.class);
                     startActivity(ilogin);
+                }else {
+                    Intent iUser = new Intent(getContext(), UserActivity.class);
+                    startActivity(iUser);
                 }
                 break;
             case R.id.offline_layout_music:
                 Intent iMusic = new Intent(getContext(), ListSongActivity.class);
                 startActivity(iMusic);
                 break;
+        }
+    }
+
+    public void CheckUserName(){
+        if (sharedPreferences.getString("email", "").equals("")){
+            offline_txt_user.setText("My music");
+        }else {
+            offline_txt_user.setText(sharedPreferences.getString("email", ""));
         }
     }
 }
