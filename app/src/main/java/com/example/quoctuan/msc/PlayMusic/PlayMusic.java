@@ -26,8 +26,8 @@ public class PlayMusic {
         Common.MEDIAPLAYER.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
 
-    public void PlayMusic(int possition,List<Songs> music){
-        String url = Common.URL_LINK_SONG + music.get(possition).getLink();
+    public void PlayMusic(Songs music){
+        String url = Common.URL_LINK_SONG + music.getLink();
         try {
             Common.MEDIAPLAYER.stop();
             Common.MEDIAPLAYER = new MediaPlayer();

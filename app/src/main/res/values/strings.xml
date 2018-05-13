@@ -8,8 +8,8 @@
     <string name="bat_hat">Music</string>
     <string name="playlist">Playlist</string>
 
-    <string name="yeu_thich">Favorite</string>
-    <string name="hot_music">Hot music</string>
+    <string name="yeu_thich">FavHotorite</string>
+    <string name="hot_music"> music</string>
     <string name="singer">Singer</string>
     <string name="charts">Charts</string>
     <string name="setting">Setting</string>
@@ -32,4 +32,15 @@
     <string name="Waiting">Vui lòng chờ</string>
     <string name="progressing">Đang xử lí</string>
     <string name="user">User</string>
+    <string name="add_list_like">Thêm vào danh sách yêu thích</string>
+    <string name="Download">Tải về</string>
+    <string name="status">Status:</string>
+    <string name="email">email:</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="newPassword">Mật khẩu mới</string>
+    <string name="presspasword">Nhập mật khẩu</string>
+    <string name="NewPassword">Mật khẩu mới</string>
+    <string name="RequestPassword">Nhập lại mật khẩu</string>
+    <string name="Cancel">Hủy</string>
+    <string name="Success">Đồng ý</string>
 </resources>
