@@ -44,7 +44,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
     private Animation small_layout_animation_img;
 
     private PlayMusic playMusic;
-    private int c_pre = 0, c_next= 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         CheckPlayed();
     }
 
-    private void CheckPlayed() {
+    public void CheckPlayed() {
         if (Common.IS_PLAYED){
             if (Common.PLAYED_IS_ONLINE){
                 ShowSmallLayoutOnline();
@@ -132,15 +132,15 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
 
     private void ShowSmallLayoutOffline() {
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-        mediaMetadataRetriever = new MediaMetadataRetriever();
-        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
-        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-        if (data != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            list_song_small_img.setImageBitmap(bitmap);
-        }else {
-            list_song_small_img.setImageResource(R.drawable.music);
-        }
+//        mediaMetadataRetriever = new MediaMetadataRetriever();
+//        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
+//        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+//        if (data != null){
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//            list_song_small_img.setImageBitmap(bitmap);
+//        }else {
+//            list_song_small_img.setImageResource(R.drawable.music);
+//        }
         list_song_small_txt_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         list_song_small_txt_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         list_song_small_btn_play.setImageLevel(0);
@@ -177,7 +177,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.list_song_small_btn_pre:
                 if (!Common.PLAYED_IS_ONLINE){
-                    PreHandle(view);
+                    playMusic.PreHandle(view);
                 }else {
                     Common.MEDIAPLAYER.seekTo(0);
                 }
@@ -189,7 +189,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.list_song_small_btn_next:
                 if (!Common.PLAYED_IS_ONLINE){
-                    NextHandle(view);
+                    playMusic.NextHandle(view);
                 }else {
                     Common.MEDIAPLAYER.seekTo(0);
                 }
@@ -197,41 +197,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void PreHandle(View view) {
-        if (c_pre != 0) {
 
-            if (Common.POSSITION_MUSIC_PLAYED == 0) {
-                Common.POSSITION_MUSIC_PLAYED = Common.MusicOfflines.size()-1;
-            }else {
-                Common.POSSITION_MUSIC_PLAYED --;
-            }
-            playMusic.PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED);
-            new ListSongActivity().CheckPlayed();
-            c_pre = 0;
-        }else {
-
-            Common.MEDIAPLAYER.seekTo(0);
-            c_pre ++;
-        }
-
-    }
-
-    private void NextHandle(View view) {
-        if (c_next != 0) {
-
-            if (Common.POSSITION_MUSIC_PLAYED == Common.MusicOfflines.size()-1) {
-                Common.POSSITION_MUSIC_PLAYED = 0;
-            }else {
-                Common.POSSITION_MUSIC_PLAYED ++;
-            }
-            playMusic.PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED);
-            new ListSongActivity().CheckPlayed();
-            c_next = 0;
-        }else {
-            Common.MEDIAPLAYER.seekTo(0);
-            c_next ++;
-        }
-    }
 
 
 }

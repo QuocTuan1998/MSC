@@ -11,11 +11,11 @@ import android.widget.ImageView;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.Connect.DownloadJson;
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.model.GetData.GetListOffline;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonMusic;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonPlaylist;
 import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.model.Songs;
-import com.example.quoctuan.msc.view.Home.HomeActivity;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 
 import java.io.Serializable;
@@ -35,8 +35,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         addControls();
+        GetListOffline();
         GetTopFiveMusic();
         GetPlayList();
+
         Common.MEDIAPLAYER = new MediaPlayer();
     }
 
@@ -49,7 +51,12 @@ public class SplashActivity extends AppCompatActivity {
         image_splash.startAnimation(animation_image);
     }
 
-
+    private void  GetListOffline() {
+        GetListOffline getListMusic = new GetListOffline(this);
+        getListMusic.GetListMusicOffline();
+        getListMusic.GetListAlbum(this);
+        getListMusic.GetListAlbumOffline();
+    }
 
     private void GetTopFiveMusic() {
         listSongData = new ArrayList<>();
@@ -106,6 +113,7 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
+
                     Intent i_home = new Intent(SplashActivity.this, MainActivity.class);
                     i_home.putExtra("Playlist", (Serializable) listPlayLlistData);
                     startActivity(i_home);
