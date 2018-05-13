@@ -27,6 +27,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
+    implementation 'com.flaviofaria:kenburnsview:1.0.7' //KenBurnsview
+    implementation 'de.hdodenhof:circleimageview:2.2.0' //CircleImage
+    implementation 'me.tankery.lib:circularSeekBar:1.1.4'//CircularSeekbar
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.android.support:design:26.1.0'
