@@ -134,6 +134,7 @@
                     android:layout_height="0.3dp"/>
 
                 <RelativeLayout
+                    android:id="@+id/offline_layout_music2"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground"
@@ -154,6 +155,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/offline_count_music2"
                         android:layout_centerVertical="true"
                         android:textColor="@color/colorBlack"
                         android:layout_toLeftOf="@+id/offline_arrow_right2"

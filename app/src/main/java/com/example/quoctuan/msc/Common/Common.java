@@ -2,9 +2,12 @@ package com.example.quoctuan.msc.Common;
 
 import android.media.MediaPlayer;
 
+import com.example.quoctuan.msc.model.Albums;
 import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.model.Users;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -50,5 +53,6 @@ public class Common {
     public static List<Songs> TopFiveMusic;
     public static MediaPlayer MEDIAPLAYER;
     public static List<Songs> MusicOfflines;
+    public static List<Albums> AlbumOfflines;
 
 }
