@@ -21,6 +21,7 @@ import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.model.ParserJson.ParserJsonLogin;
 import com.example.quoctuan.msc.model.User;
 import com.example.quoctuan.msc.model.Users;
+import com.example.quoctuan.msc.view.Main.MainFragment.OfflineFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,9 +96,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Đang xử lí đăng nhập");
                 progressDialog.setMessage("vui lòng đợi chúng tôi trong giây lát");
-
+                progressDialog.show();
                 if (CheckInforLogin())
-
                     Login();
                 break;
         }
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         HashMap<String, String> hm_controller = new HashMap<>();
         hm_controller.put("c", "user");
         HashMap<String, String> hm_function = new HashMap<>();
-        hm_function.put("a", "login");
+        hm_function.put("a", Common.LOGIN);
         HashMap<String, String> hm_email = new HashMap<>();
         hm_email.put("email", login_ed_name.getText().toString());
         HashMap<String, String> hm_password = new HashMap<>();
@@ -199,9 +199,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+        onBackPressed();
+        new OfflineFragment().CheckUserName();
     }
-    //kiểm tra thông tin đăng nhập
 
+
+    //kiểm tra thông tin đăng nhập
     public boolean CheckInforLogin() {
         if (login_ed_name.getText().toString().isEmpty() || login_ed_pass.getText().toString().isEmpty()) {
             if (login_ed_name.getText().toString().isEmpty())
