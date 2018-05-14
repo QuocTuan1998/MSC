@@ -11,6 +11,8 @@ import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.view.ListSong.ListSongActivity;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
+import com.example.quoctuan.msc.view.PlayMusic.PlayActivity;
+import com.example.quoctuan.msc.view.PlayMusic.fragment.PlayFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,14 +35,19 @@ public class PlayMusic {
             Common.MEDIAPLAYER = new MediaPlayer();
             Common.MEDIAPLAYER.setDataSource(url);
             Common.MEDIAPLAYER.prepare();
-            Common.MEDIAPLAYER.start();
+            Common.MEDIAPLAYER.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    Common.MEDIAPLAYER.start();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void PlayMusic(Context context, int possition, List<Songs> music){
-        Uri uri = Uri.parse(music.get(possition).getLink());
+    public void PlayMusic(Context context, Songs music){
+        Uri uri = Uri.parse(music.getLink());
         try {
             Common.MEDIAPLAYER.stop();
             Common.MEDIAPLAYER = new MediaPlayer();
@@ -61,39 +68,67 @@ public class PlayMusic {
         Common.MEDIAPLAYER.pause();
     }
 
-    public void PreHandle(View view, List<Songs> music) {
-        if (c_pre != 0) {
-
-            if (Common.POSSITION_MUSIC_PLAYED == 0) {
-                Common.POSSITION_MUSIC_PLAYED = Common.MusicOfflines.size()-1;
-            }else {
-                Common.POSSITION_MUSIC_PLAYED --;
-            }
-            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED, music);
-            new ListSongActivity().CheckPlayed();
-            c_pre = 0;
-        }else {
-
+    public void PreHandle(Context context) {
+        if (Common.PLAYED_IS_ONLINE){
             Common.MEDIAPLAYER.seekTo(0);
-            c_pre ++;
-        }
+        }else {
+//            if (c_pre != 0) {
+//                if (Common.POSSITION_MUSIC_PLAYED == 0) {
+//                    Common.POSSITION_MUSIC_PLAYED = Common.MusicOfflines.size()-1;
+//                }else {
+//                    Common.POSSITION_MUSIC_PLAYED --;
+//                }
+//                PlayMusic(context, Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED--));
+//                new ListSongActivity().CheckPlayed();
+//                c_pre = 0;
+//            }else {
+//
+//                Common.MEDIAPLAYER.seekTo(0);
+//                c_pre ++;
+//            }
 
+            if (Common.MEDIAPLAYER.getCurrentPosition() > 1000){
+                Common.MEDIAPLAYER.seekTo(0);
+            }else {
+                if (Common.POSSITION_MUSIC_PLAYED == 0){
+                    Common.POSSITION_MUSIC_PLAYED = Common.MusicOfflines.size()-1;
+                }else {
+                    Common.POSSITION_MUSIC_PLAYED --;
+                }
+                PlayMusic(context, Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED));
+                Common.SONGPLAYED = Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED);
+                new PlayFragment().addData();
+            }
+        }
     }
 
-    public void NextHandle(View view, List<Songs> music) {
-        if (c_next != 0) {
+    public void NextHandle(Context context) {
+
+        if (Common.PLAYED_IS_ONLINE){
+            Common.MEDIAPLAYER.seekTo(0);
+        }else {
+//            if (c_next != 0) {
+//                if (Common.POSSITION_MUSIC_PLAYED == Common.MusicOfflines.size()-1) {
+//                    Common.POSSITION_MUSIC_PLAYED = 0;
+//                }else {
+//                    Common.POSSITION_MUSIC_PLAYED ++;
+//                }
+//                PlayMusic(context, Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED++));
+//                new ListSongActivity().CheckPlayed();
+//                c_next = 0;
+//            }else {
+//                Common.MEDIAPLAYER.seekTo(0);
+//                c_next ++;
+//            }
 
             if (Common.POSSITION_MUSIC_PLAYED == Common.MusicOfflines.size()-1) {
                 Common.POSSITION_MUSIC_PLAYED = 0;
             }else {
-                Common.POSSITION_MUSIC_PLAYED ++;
+                Common.POSSITION_MUSIC_PLAYED++;
             }
-            PlayMusic(view.getContext(), Common.POSSITION_MUSIC_PLAYED,music);
-            new ListSongActivity().CheckPlayed();
-            c_next = 0;
-        }else {
-            Common.MEDIAPLAYER.seekTo(0);
-            c_next ++;
+            PlayMusic(context, Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED));
+            Common.SONGPLAYED = Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED);
+            new PlayFragment().addData();
         }
     }
 }

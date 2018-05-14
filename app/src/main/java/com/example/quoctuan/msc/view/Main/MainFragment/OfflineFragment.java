@@ -26,6 +26,7 @@ import com.example.quoctuan.msc.view.ListSong.Fragment.AlbumFragment;
 import com.example.quoctuan.msc.model.User;
 import com.example.quoctuan.msc.view.ListSong.ListSongActivity;
 import com.example.quoctuan.msc.view.Login.LoginActivity;
+import com.example.quoctuan.msc.view.Main.MainActivity;
 import com.example.quoctuan.msc.view.User.UserActivity;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
     //private TextView offline_count_list_song, offline_count_music, offline_txt_user;
     private TextView offline_count_music2;
     private static TextView offline_count_list_song, offline_count_music, offline_txt_user;
-    private LinearLayout offline_layout_user;
+    private static LinearLayout offline_layout_user, offline_layout_main;
     private RelativeLayout offline_layout_music,offline_layout_music2;
 
     private ArrayList<Songs> arrayList;
@@ -73,6 +74,7 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
         offline_count_music     = view.findViewById(R.id.offline_count_music);
         offline_layout_music    = view.findViewById(R.id.offline_layout_music);
         offline_txt_user        = view.findViewById(R.id.offline_txt_user);
+        offline_layout_main     = view.findViewById(R.id.offline_layout_main);
 
         offline_layout_music2   = view.findViewById(R.id.offline_layout_music2);
         offline_count_music2    = view.findViewById(R.id.offline_count_music2);
@@ -168,5 +170,16 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
         }else {
             offline_txt_user.setText(sharedPreferences.getString("email", ""));
         }
+    }
+
+    public void SetLayoutWhenPlaying() {
+        new MainActivity().ShowSmallMediaLayout();
+        if (offline_layout_main.getPaddingBottom() == 0){
+            SetPadding();
+        }
+    }
+
+    public void SetPadding() {
+        offline_layout_main.setPadding(0, 0 , 0 , 140);
     }
 }

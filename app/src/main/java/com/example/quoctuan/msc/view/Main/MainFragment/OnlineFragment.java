@@ -2,6 +2,7 @@ package com.example.quoctuan.msc.view.Main.MainFragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.PlaylistMusicAdapter;
@@ -19,6 +21,7 @@ import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.ShowMusicOnlineActivity;
 import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.view.Main.MainActivity;
 
@@ -28,7 +31,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OnlineFragment extends Fragment {
+public class OnlineFragment extends Fragment implements View.OnClickListener {
 
     private static RecyclerView online_recyvlerview_topfivemusic;
     private RecyclerView online_recyclerview_playlist;
@@ -36,6 +39,7 @@ public class OnlineFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private TopMusicAdapter topMusicAdapter;
     private PlaylistMusicAdapter playlistMusicAdapter;
+    private TextView online_seemore;
 
     private View view;
     public static MediaPlayer mediaPlayer;
@@ -64,6 +68,7 @@ public class OnlineFragment extends Fragment {
         initRecyclerViewTopMusic(); //phương thức tạo recyvlerview top 5 music
         initRecyclerViewPlaylist(); //phương thức tạo recyclerview playlist
         main_layout_main = view.findViewById(R.id.main_layout_main);
+        online_seemore   = view.findViewById(R.id.online_seemore);
 
         playMusic = new PlayMusic();
     }
@@ -88,6 +93,7 @@ public class OnlineFragment extends Fragment {
                 Toast.makeText(getActivity(), "ád" + disallowIntercept, Toast.LENGTH_SHORT).show();
             }
         });
+        online_seemore.setOnClickListener(this);
     }
 
     //phương thức tạo recyvlerview top 5 music
@@ -111,7 +117,7 @@ public class OnlineFragment extends Fragment {
 
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         online_recyclerview_playlist.setLayoutManager(linearLayoutManager);
-        List<PlayLists> listPlayLlistData = (List<PlayLists>) getActivity().getIntent().getSerializableExtra("Playlist");
+        List<PlayLists> listPlayLlistData = Common.LISTPLAYLIST;
         playlistMusicAdapter = new PlaylistMusicAdapter(listPlayLlistData, getContext());
         online_recyclerview_playlist.setAdapter(playlistMusicAdapter);
         playlistMusicAdapter.notifyDataSetChanged();
@@ -126,5 +132,15 @@ public class OnlineFragment extends Fragment {
 
     public void SetPadding() {
         main_layout_main.setPadding(0, 0 , 0 , 140);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.online_seemore:
+                Intent intent = new Intent(getContext(), ShowMusicOnlineActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

@@ -56,7 +56,7 @@ public class GetListOffline {
             if (count > 0){
                 while (cursor.moveToNext()){
                     int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-                    String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
+                    String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                     Common.MusicOfflines.add(new Songs(id,artist,0,0,0,title,"","",data));

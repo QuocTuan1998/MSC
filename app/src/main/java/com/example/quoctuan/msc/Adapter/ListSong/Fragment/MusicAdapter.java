@@ -1,8 +1,11 @@
 package com.example.quoctuan.msc.Adapter.ListSong.Fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +40,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicViewHolder> {
     @Override
     public void onBindViewHolder(MusicViewHolder holder, int position) {
         //set image
-//        mediaMetadataRetriever = new MediaMetadataRetriever();
-//        mediaMetadataRetriever.setDataSource(listMusicOffline.get(position).getLink());
-//        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-//        if (data != null){
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//            holder.item_music_off_img_music.setImageBitmap(bitmap);
-//        }
-
+        mediaMetadataRetriever = new MediaMetadataRetriever();
+        Log.d("kiemtra", listMusicOffline.get(position).getLink());
+        mediaMetadataRetriever.setDataSource(listMusicOffline.get(position).getLink());
+        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+        if (data != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            holder.item_music_off_img_music.setImageBitmap(bitmap);
+        }
         holder.item_music_off_txt_name.setText(listMusicOffline.get(position).getTen());
         holder.item_music_off_txt_singer.setText(listMusicOffline.get(position).getCasi());
 

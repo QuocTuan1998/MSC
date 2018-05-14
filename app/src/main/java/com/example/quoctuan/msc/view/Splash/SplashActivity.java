@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -75,7 +74,7 @@ public class SplashActivity extends AppCompatActivity {
         downloadJson.execute(Common.URL_API);
 
         try {
-            Common.TopFiveMusic = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
+            Common.TopFiveMusic = new ParserJsonMusic().ParserJsonListMusic(downloadJson.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -98,7 +97,7 @@ public class SplashActivity extends AppCompatActivity {
         downloadJson.execute(Common.URL_API);
 
         try {
-            Common.MusicOnlines = new ParserJsonMusic().ParserJsonMusic(downloadJson.get());
+            Common.MusicOnlines = new ParserJsonMusic().ParserJsonListMusic(downloadJson.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -119,7 +118,7 @@ public class SplashActivity extends AppCompatActivity {
         downloadJson.execute(Common.URL_API);
 
         try {
-            listPlayLlistData = new ParserJsonPlaylist().ParserJsonPlaylist(downloadJson.get());
+            Common.LISTPLAYLIST = new ParserJsonPlaylist().ParserJsonPlaylist(downloadJson.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -141,7 +140,7 @@ public class SplashActivity extends AppCompatActivity {
                 }finally {
 
                     Intent i_home = new Intent(SplashActivity.this, MainActivity.class);
-                    i_home.putExtra("Playlist", (Serializable) listPlayLlistData);
+
                     startActivity(i_home);
                 }
             }

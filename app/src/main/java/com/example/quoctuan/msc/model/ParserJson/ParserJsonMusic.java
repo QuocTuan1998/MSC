@@ -18,7 +18,7 @@ import java.util.List;
 public class ParserJsonMusic {
     List<Songs> listSong;
 
-    public List<Songs> ParserJsonMusic(String dataJson){
+    public List<Songs> ParserJsonListMusic(String dataJson){
         listSong = new ArrayList<>();
 
         try {
@@ -40,6 +40,30 @@ public class ParserJsonMusic {
         }
 
         return listSong;
+    }
+
+    public Songs ParserJsonOneMusic(String dataJson){
+        Songs songs = null;
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(dataJson);
+            JSONArray jsonArray = jsonObject.getJSONArray("infor");
+            JSONObject jsonData = jsonArray.getJSONObject(0);
+            songs = new Songs(
+                    jsonData.getInt("id"),
+                    jsonData.getString("casi_id"),
+                    0, 0, 0, jsonData.getString("ten"),
+                    jsonData.getString("anh"),
+                    jsonData.getString("loi_bai_hat"),
+                    jsonData.getString("link")
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return songs;
     }
 
 }
