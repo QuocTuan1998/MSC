@@ -25,6 +25,7 @@
         android:layout_height="wrap_content">
 
         <me.tankery.lib.circularseekbar.CircularSeekBar
+            android:id="@+id/play_seekbar"
             android:layout_width="220dp"
             android:layout_height="240dp"
             app:cs_circle_style = "round"
@@ -72,25 +73,23 @@
             android:textColor="#a1a1a1"
             android:fontFamily="monospace"
             android:textSize="16sp"
-            android:text="17 and a half years old"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/play_text_lyric2"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:fontFamily="monospace"
-            android:textSize="16sp"
-            android:text="Worrying about my brother finding out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<TextView-->
+            <!--android:id="@+id/play_text_lyric2"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:fontFamily="monospace"-->
+            <!--android:textSize="16sp"-->
+            <!--android:text="Worrying about my brother finding out"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
         <TextView
             android:id="@+id/play_text_lyric3"
             android:textAlignment="center"
             android:textColor="#a1a1a1"
             android:fontFamily="monospace"
             android:textSize="16sp"
-            android:text="17 and a half years old"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -102,16 +101,16 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/play_btn_shuffle"
-            android:layout_weight="1"
-            android:src="@drawable/loop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+        <!--<ImageView-->
+            <!--android:id="@+id/play_btn_shuffle"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/loop"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content" />-->
         <ImageView
             android:id="@+id/play_btn_prev"
             android:layout_weight="1"
-            android:src="@drawable/prev"
+            android:src="@drawable/ic_skip_previous_white"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <FrameLayout
@@ -120,31 +119,31 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/play_img_play"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:src="@drawable/pause"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
                 android:id="@+id/play_btn_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/circle_play" />
+            <ImageView
+                android:id="@+id/play_img_play"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:src="@drawable/ic_pause_play_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </FrameLayout>
         <ImageView
             android:id="@+id/play_btn_next"
             android:layout_weight="1"
-            android:src="@drawable/next"
+            android:src="@drawable/ic_skip_next_white"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/play_btn_repeat"
-            android:layout_weight="1"
-            android:src="@drawable/repeat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+        <!--<ImageView-->
+            <!--android:id="@+id/play_btn_repeat"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/repeat"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content" />-->
     </LinearLayout>
 
 

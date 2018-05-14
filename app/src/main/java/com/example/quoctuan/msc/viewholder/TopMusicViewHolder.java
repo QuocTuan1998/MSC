@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.quoctuan.msc.Adapter.Main.Online.TopMusicAdapter;
 import com.example.quoctuan.msc.Common.Common;
+import com.example.quoctuan.msc.view.Main.MainFragment.OfflineFragment;
 import com.example.quoctuan.msc.view.PlayMusic.PlayActivity;
 import com.example.quoctuan.msc.R;
 import com.example.quoctuan.msc.Connect.DownloadJson;
@@ -82,8 +83,9 @@ public class TopMusicViewHolder extends RecyclerView.ViewHolder implements View.
                 Common.PLAYED_IS_ONLINE = true;
                 Common.POSSITION_MUSIC_PLAYED = getAdapterPosition();
                 new PlayMusic().PlayMusic(Common.TopFiveMusic.get(getAdapterPosition()));
+                Common.SONGPLAYED = Common.TopFiveMusic.get(getAdapterPosition());
                 new OnlineFragment().SetLayoutWhenPlaying();
-
+                new OfflineFragment().SetLayoutWhenPlaying();
                 Intent iPlay = new Intent(view.getContext(), PlayActivity.class);
                 view.getContext().startActivity(iPlay);
                 break;

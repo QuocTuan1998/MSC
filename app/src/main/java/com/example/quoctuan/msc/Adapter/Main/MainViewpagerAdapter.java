@@ -23,7 +23,7 @@ public class MainViewpagerAdapter extends FragmentPagerAdapter {
         listFragment.add(new OnlineFragment());
         listFragment.add(new OfflineFragment());
         listTitle.add("Online");
-        listTitle.add("Offline");
+        listTitle.add("Người dùng");
     }
 
     @Override

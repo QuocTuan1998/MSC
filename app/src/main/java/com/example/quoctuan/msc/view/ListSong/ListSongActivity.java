@@ -1,5 +1,8 @@
 package com.example.quoctuan.msc.view.ListSong;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -20,7 +23,10 @@ import com.example.quoctuan.msc.Adapter.ListSong.ListSongViewPagerAdapter;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.view.ListSong.Fragment.MusicFragment;
 import com.example.quoctuan.msc.view.Main.MainActivity;
+import com.example.quoctuan.msc.view.PlayMusic.PlayActivity;
+import com.example.quoctuan.msc.view.PlayMusic.fragment.PlayFragment;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -110,6 +116,7 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         list_song_small_btn_pre.setOnClickListener(this);
         list_song_small_btn_play.setOnClickListener(this);
         list_song_small_btn_next.setOnClickListener(this);
+        list_song_small_layout.setOnClickListener(this);
     }
 
     @Override
@@ -129,15 +136,15 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
 
     private void ShowSmallLayoutOffline() {
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-//        mediaMetadataRetriever = new MediaMetadataRetriever();
-//        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
-//        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-//        if (data != null){
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//            list_song_small_img.setImageBitmap(bitmap);
-//        }else {
-//            list_song_small_img.setImageResource(R.drawable.music);
-//        }
+        mediaMetadataRetriever = new MediaMetadataRetriever();
+        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
+        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+        if (data != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            list_song_small_img.setImageBitmap(bitmap);
+        }else {
+            list_song_small_img.setImageResource(R.drawable.music);
+        }
         list_song_small_txt_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         list_song_small_txt_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         list_song_small_btn_play.setImageLevel(0);
@@ -156,10 +163,11 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) list_song_small_layout.getLayoutParams();
         layoutParams.bottomMargin = 8;
         list_song_small_layout.setLayoutParams(layoutParams);
+        //new MusicFragment().SetLayoutWhenPlaying();
     }
 
     public void PressButtonPlayPause(){
-        if (!IS_BUTTON_PLAY){
+        if (Common.MEDIAPLAYER.isPlaying()){
             list_song_small_btn_play.setImageLevel(1);
             playMusic.PauseMusic();
             IS_BUTTON_PLAY = !IS_BUTTON_PLAY;
@@ -171,11 +179,18 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new MainActivity().CheckPlayed();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.list_song_small_btn_pre:
                 if (!Common.PLAYED_IS_ONLINE){
-                    playMusic.PreHandle(view,Common.MusicOfflines);
+                    new PlayMusic().PreHandle(this);
+                    CheckPlayed();
                 }else {
                     Common.MEDIAPLAYER.seekTo(0);
                 }
@@ -186,16 +201,13 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.list_song_small_btn_next:
-                if (!Common.PLAYED_IS_ONLINE){
-                    playMusic.NextHandle(view,Common.MusicOfflines);
-                }else {
-                    Common.MEDIAPLAYER.seekTo(0);
-                }
+                new PlayMusic().NextHandle(this);
+                CheckPlayed();
                 break;
             case R.id.list_song_small_layout:
 //                Toast.makeText(this, "click!!", Toast.LENGTH_SHORT).show();
-//                Intent iPlay = new Intent(ListSongActivity.this, PlayActivity.class);
-//                startActivity(iPlay);
+                Intent iPlay = new Intent(ListSongActivity.this, PlayActivity.class);
+                startActivity(iPlay);
                 break;
         }
     }

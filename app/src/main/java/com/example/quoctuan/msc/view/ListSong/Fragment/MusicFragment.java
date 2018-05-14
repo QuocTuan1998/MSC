@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.example.quoctuan.msc.Adapter.ListSong.Fragment.MusicAdapter;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.view.Main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +21,7 @@ import com.example.quoctuan.msc.R;
 public class MusicFragment extends Fragment {
     private View view;
 
-    private RecyclerView fragment_music_recyclerview;
+    private static RecyclerView fragment_music_recyclerview;
     private MusicAdapter musicAdapter;
     private LinearLayoutManager linearLayoutManager;
 
@@ -37,6 +38,7 @@ public class MusicFragment extends Fragment {
 
         addControls();
         addEvents();
+        checkSmalllayout();
         return view;
     }
 
@@ -52,6 +54,22 @@ public class MusicFragment extends Fragment {
 
     private void addEvents() {
 
+    }
+
+    private void checkSmalllayout() {
+        if (Common.IS_PLAYED){
+            SetLayoutWhenPlaying();
+        }
+    }
+
+    public void SetLayoutWhenPlaying() {
+        if (fragment_music_recyclerview.getPaddingBottom() == 0){
+            SetPadding();
+        }
+    }
+
+    private void SetPadding() {
+        fragment_music_recyclerview.setPadding(0,0,0,140);
     }
 
 }

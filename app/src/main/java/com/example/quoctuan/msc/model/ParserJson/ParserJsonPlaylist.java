@@ -1,6 +1,7 @@
 package com.example.quoctuan.msc.model.ParserJson;
 
 import com.example.quoctuan.msc.model.PlayLists;
+import com.example.quoctuan.msc.model.Songs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,5 +37,30 @@ public class ParserJsonPlaylist {
         }
 
         return playListsData;
+    }
+
+    public List<Songs> ParserJsonGetListSongFromIDPlayList(String data){
+        List<Songs> songsList = new ArrayList<>();
+
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            JSONArray jsonArray = jsonObject.getJSONArray("playlist");
+            for (int i = 0; i <jsonArray.length(); i++){
+                JSONObject jsonData = jsonArray.getJSONObject(i);
+                Songs songs = new Songs(
+                        jsonData.getInt("id"),
+                        jsonData.getString("casi_id"),
+                        0, 0, 0, jsonData.getString("ten"),
+                        jsonData.getString("anh"),
+                        "",
+                        jsonData.getString("link")
+                );
+                songsList.add(songs);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return songsList;
     }
 }

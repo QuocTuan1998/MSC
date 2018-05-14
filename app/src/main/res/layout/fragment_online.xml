@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
                 <TextView
+                    android:id="@+id/online_seemore"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/colorWhite"
                     android:clickable="true"

@@ -3,6 +3,7 @@ package com.example.quoctuan.msc.Common;
 import android.media.MediaPlayer;
 
 import com.example.quoctuan.msc.model.Albums;
+import com.example.quoctuan.msc.model.PlayLists;
 import com.example.quoctuan.msc.model.Songs;
 import com.example.quoctuan.msc.model.Users;
 
@@ -25,7 +26,7 @@ public class Common {
 //    public static final String SERVER_NAME = "http://10.0.2.2/";
 //    public static final String URL = SERVER_NAME + "php/mvc/"; // you cna change another location
 //=======
-    public static final String SERVER_NAME = "http://192.168.1.8/";
+    public static final String SERVER_NAME = "http://172.20.110.194/";
     public static final String URL = SERVER_NAME + "mvc/"; // you cna change another location
 
     public static final String URL_API = URL + "api.php";
@@ -36,6 +37,8 @@ public class Common {
     public static boolean IS_PLAYED = false;
     public static boolean PLAYED_IS_ONLINE = false;
     public static int POSSITION_MUSIC_PLAYED = 0;
+    public static Songs SONGPLAYED;
+
 
     //controller
     public static final String ALBUM = "album";
@@ -60,6 +63,8 @@ public class Common {
     public static final String UNFAV = "boyeuThich";
     public static final String NEWPASSWORD = "newPassword";
     public static final String PlusMusic = "PlusMusic";
+    public static final String INFOMUSIC = "InfoMusic";
+    public static final String FINDSONGFROMIDPLAYLIST = "findSongsFromPlaylist";
 
 
     //DEFAULT DATA
@@ -67,8 +72,9 @@ public class Common {
     public static MediaPlayer MEDIAPLAYER;
     public static List<Songs> MusicOfflines;
     public static List<Albums> AlbumOfflines;
-
+    public static List<PlayLists> LISTPLAYLIST;
     public static List<Songs> MusicOnlines;
+    public static List<Songs> LISTSONGOFPLAYLIST;
 
 
 }

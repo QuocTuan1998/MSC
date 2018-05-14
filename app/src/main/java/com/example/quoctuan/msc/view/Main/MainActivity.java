@@ -2,6 +2,7 @@ package com.example.quoctuan.msc.view.Main;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -22,6 +23,9 @@ import com.example.quoctuan.msc.Adapter.Main.MainViewpagerAdapter;
 import com.example.quoctuan.msc.Common.Common;
 import com.example.quoctuan.msc.PlayMusic.PlayMusic;
 import com.example.quoctuan.msc.R;
+import com.example.quoctuan.msc.view.Main.MainFragment.OfflineFragment;
+import com.example.quoctuan.msc.view.Main.MainFragment.OnlineFragment;
+import com.example.quoctuan.msc.view.PlayMusic.PlayActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 ShowSmallLayoutOffline();
             }
+            new OnlineFragment().SetLayoutWhenPlaying();
+            new OfflineFragment().SetLayoutWhenPlaying();
         }
 
         if (Common.MEDIAPLAYER.isPlaying()) {
@@ -116,15 +122,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void ShowSmallLayoutOffline(){
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-//        mediaMetadataRetriever = new MediaMetadataRetriever();
-//        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
-//        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-//        if (data != null){
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//            content_play_img.setImageBitmap(bitmap);
-//        }else {
-//                content_play_img.setImageResource(R.drawable.music);
-//        }
+        mediaMetadataRetriever = new MediaMetadataRetriever();
+        mediaMetadataRetriever.setDataSource(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getLink());
+        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+        if (data != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            content_play_img.setImageBitmap(bitmap);
+        }else {
+                content_play_img.setImageResource(R.drawable.music);
+        }
         content_name.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getTen());
         content_singer.setText(Common.MusicOfflines.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         content_btn_pause_play.setImageLevel(0);
@@ -145,26 +151,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void PressButtonPlayPause(){
-        if (!Common.MEDIAPLAYER.isPlaying()){
+        if (Common.MEDIAPLAYER.isPlaying()){
             content_btn_pause_play.setImageLevel(1);
             playMusic.PauseMusic();
         }else {
             content_btn_pause_play.setImageLevel(0);
             playMusic.StartMusic();
         }
-    }
-
-    private void NextMusic() {
-        if (!Common.PLAYED_IS_ONLINE){
-            new PlayMusic().PlayMusic(this, Common.POSSITION_MUSIC_PLAYED ++,Common.MusicOfflines);
-            Common.POSSITION_MUSIC_PLAYED++;
-        }else Common.MEDIAPLAYER.seekTo(0);
-    }
-
-    private void PrevMusic() {
-        if (!Common.PLAYED_IS_ONLINE){
-
-        }else Common.MEDIAPLAYER.seekTo(0);
     }
 
     @Override
@@ -174,12 +167,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 PressButtonPlayPause();
                 break;
             case R.id.main_small_meida_layout:
+                Intent iPlay = new Intent(this, PlayActivity.class);
+                startActivity(iPlay);
                 break;
             case R.id.content_btn_next:
-                NextMusic();
+                new PlayMusic().NextHandle(this);
+                CheckPlayed();
                 break;
             case R.id.content_btn_prev:
-                PrevMusic();
+                new PlayMusic().PreHandle(this);
+                CheckPlayed();
                 break;
         }
     }
