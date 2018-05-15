@@ -22,12 +22,8 @@ public class Common {
     //10.15.215.36
     //Local of genymotion 10.0.3.2
     //Local of Android emulator 10.0.2.2
-//<<<<<<< HEAD
-//    public static final String SERVER_NAME = "http://10.0.2.2/";
-//    public static final String URL = SERVER_NAME + "php/mvc/"; // you cna change another location
-//=======
-    public static final String SERVER_NAME = "http://172.20.110.194/";
-    public static final String URL = SERVER_NAME + "mvc/"; // you cna change another location
+    public static final String SERVER_NAME = "http://10.0.2.2/";
+    public static final String URL = SERVER_NAME + "php/mvc/"; // you cna change another location
 
     public static final String URL_API = URL + "api.php";
     public static final String URL_IMG_SONG = URL + "public/img/songs/";

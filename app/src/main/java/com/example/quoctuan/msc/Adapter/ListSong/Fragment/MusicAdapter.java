@@ -40,13 +40,19 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicViewHolder> {
     @Override
     public void onBindViewHolder(MusicViewHolder holder, int position) {
         //set image
-        mediaMetadataRetriever = new MediaMetadataRetriever();
-        Log.d("kiemtra", listMusicOffline.get(position).getLink());
-        mediaMetadataRetriever.setDataSource(listMusicOffline.get(position).getLink());
-        byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
-        if (data != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            holder.item_music_off_img_music.setImageBitmap(bitmap);
+        try {
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            Log.d("kiemtra", listMusicOffline.get(position).getLink());
+            mediaMetadataRetriever.setDataSource(listMusicOffline.get(position).getLink());
+            byte [] data = mediaMetadataRetriever.getEmbeddedPicture();
+            if (data != null){
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                holder.item_music_off_img_music.setImageBitmap(bitmap);
+            }else {
+                holder.item_music_off_img_music.setImageResource(R.drawable.music);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         holder.item_music_off_txt_name.setText(listMusicOffline.get(position).getTen());
         holder.item_music_off_txt_singer.setText(listMusicOffline.get(position).getCasi());

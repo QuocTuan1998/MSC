@@ -1,5 +1,7 @@
 package com.example.quoctuan.msc.model;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 /**
@@ -11,6 +13,7 @@ public class Albums {
     private int casi_id;
     private int theloai_id;
     private String anh;
+    private Uri anh_album;
     private String ten;
     private Date ngay;
     private String casi;
@@ -29,12 +32,20 @@ public class Albums {
         this.ngay = ngay;
     }
 
-    public Albums(int id, String casi, String ten, String anh, int soBai) {
+    public Albums(int id, String casi, String ten, Uri anh_album, int soBai) {
         this.id = id;
         this.casi = casi;
         this.ten = ten;
-        this.anh = anh;
+        this.anh_album = anh_album;
         this.soBai = soBai;
+    }
+
+    public Uri getAnh_album() {
+        return anh_album;
+    }
+
+    public void setAnh_album(Uri anh_album) {
+        this.anh_album = anh_album;
     }
 
     public String getCasi() {

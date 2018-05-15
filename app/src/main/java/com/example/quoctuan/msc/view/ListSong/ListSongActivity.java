@@ -54,9 +54,16 @@ public class ListSongActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_song);
 
+
+
         addControls();
         addEvents();
         CheckPlayed();
+
+        Intent intent= getIntent();
+        if (intent.getIntExtra("album", 0) == 3){
+            list_song_viewpager.setCurrentItem(2);
+        }
     }
 
     public void CheckPlayed() {

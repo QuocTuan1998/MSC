@@ -158,7 +158,8 @@ public class OfflineFragment extends Fragment implements View.OnClickListener {
                 startActivity(iMusic);
                 break;
             case R.id.offline_layout_music2:
-                Intent iAlbum = new Intent(getContext(), ListSongActivity.class);
+                Intent iAlbum = new Intent(view.getContext(), ListSongActivity.class);
+                iAlbum.putExtra("album",3);
                 startActivity(iAlbum);
                 break;
         }

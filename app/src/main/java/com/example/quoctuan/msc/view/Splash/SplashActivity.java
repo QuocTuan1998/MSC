@@ -1,7 +1,14 @@
 package com.example.quoctuan.msc.view.Splash;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -28,19 +35,22 @@ public class SplashActivity extends AppCompatActivity {
     private ImageView image_splash;
     private List<Songs> listSongData;
     private List<PlayLists> listPlayLlistData;
-
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        addControls();
-        GetListOffline();
-        GetTopFiveMusic();
-        GetPlayList();
-        GetAllMusic();
+        if (checkPermissionREAD_EXTERNAL_STORAGE(this)){
+            addControls();
+            GetListOffline();
+            GetTopFiveMusic();
+            GetPlayList();
+            GetAllMusic();
+            Common.MEDIAPLAYER = new MediaPlayer();
+        }
 
-        Common.MEDIAPLAYER = new MediaPlayer();
+
     }
 
 
@@ -142,9 +152,37 @@ public class SplashActivity extends AppCompatActivity {
                     Intent i_home = new Intent(SplashActivity.this, MainActivity.class);
 
                     startActivity(i_home);
+                    finish();
                 }
             }
         });
         thread.start();
+    }
+
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+            final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        (Activity) context,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    (Activity) context,
+                                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
     }
 }

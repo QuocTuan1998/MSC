@@ -1,11 +1,16 @@
 package com.example.quoctuan.msc.model.GetData;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.example.quoctuan.msc.Common.Common;
@@ -47,6 +52,7 @@ public class GetListOffline {
         String selection = null;
         String sortOrder = MediaStore.Audio.Media.ALBUM + " ASC";
         cursor = contentResolver.query(uri, projection, selection, null , sortOrder);
+
     }
 
     public void GetListMusicOffline(){
@@ -59,12 +65,12 @@ public class GetListOffline {
                     String data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+                    Log.d("album", data);
                     Common.MusicOfflines.add(new Songs(id,artist,0,0,0,title,"","",data));
                 }
             }
         }
     }
-
 
     public void GetListAlbumOffline() {
         Common.AlbumOfflines = new ArrayList<>();
@@ -79,11 +85,12 @@ public class GetListOffline {
 
                     String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM));
 
-                    String anh = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
+                    Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+                    Uri albumArtUri = ContentUris.withAppendedId(sArtworkUri, id);
 
                     int album_song = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS));
 
-                    Common.AlbumOfflines.add(new Albums(id,casi,title,anh,album_song));
+                    Common.AlbumOfflines.add(new Albums(id,casi,title,albumArtUri,album_song));
                 }
             }
         }

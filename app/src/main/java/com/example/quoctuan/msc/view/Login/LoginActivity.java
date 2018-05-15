@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         attr.add(hm_password);
 
         downloadJson = new DownloadJson(attr);
-        downloadJson.execute(getResources().getString(R.string.link_login));
+        downloadJson.execute(Common.URL_API);
 
         try {
             if (!downloadJson.get().isEmpty()){ //nếu downloadJson.get() có dữ liệu là <=> đăng nhập thành công

@@ -113,10 +113,10 @@ public class ShowMusicOnlineActivity extends AppCompatActivity implements View.O
 
     public void ShowSmallLayoutOnline(){
         if (!IS_SET_MARGIN_BOTTOM) SetPaddingBottom();
-        Picasso.get().load(Common.URL_IMG_SONG + Common.LISTSONGOFPLAYLIST.get
+        Picasso.get().load(Common.URL_IMG_SONG + Common.TopFiveMusic.get
                 (Common.POSSITION_MUSIC_PLAYED).getAnh()).into(show_play_img);
-        show_name.setText(Common.LISTSONGOFPLAYLIST.get(Common.POSSITION_MUSIC_PLAYED).getTen());
-        show_singer.setText(Common.LISTSONGOFPLAYLIST.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
+        show_name.setText(Common.TopFiveMusic.get(Common.POSSITION_MUSIC_PLAYED).getTen());
+        show_singer.setText(Common.TopFiveMusic.get(Common.POSSITION_MUSIC_PLAYED).getCasi());
         show_btn_pause_play.setImageLevel(0);
     }
 

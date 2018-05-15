@@ -97,6 +97,7 @@
                     android:layout_height="wrap_content">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/offline_icon_music1"
+                        android:src="@drawable/music"
                         android:layout_margin="10dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
@@ -143,6 +144,7 @@
                     android:layout_height="wrap_content">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/offline_icon_music2"
+                        android:src="@drawable/music"
                         android:layout_margin="10dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
@@ -187,6 +189,7 @@
                     android:layout_height="wrap_content">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/offline_icon_music3"
+                        android:src="@drawable/music"
                         android:layout_margin="10dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
@@ -230,6 +233,7 @@
                     android:layout_height="wrap_content">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/offline_icon_music4"
+                        android:src="@drawable/music"
                         android:layout_margin="10dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
